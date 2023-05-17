@@ -12,6 +12,8 @@ Move right              | D
 
 Destroy tile            | Left Click
 
+Select Item             | 1-8
+
 Open inventory          | E
 
 Open debug screen       | Q
