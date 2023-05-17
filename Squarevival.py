@@ -3,7 +3,7 @@ import math, pygame, random, sys
 pygame.init()
 
 #DICTIONARIES
-#Window info.
+#Window info
 Config = {
     "Framerate"    : 30           ,
     "ScreenCaption": "Squarevival Alpha",
@@ -166,7 +166,7 @@ VariablesNumber = {
     "camera_x"           : 0,
     "camera_y"           : 0,
     "camera_z"           : Settings["GridW"] / 18,
-    "hotbar"             : 1,
+    "hotbar"             : 0,
     "player_posx"        : 0,
     "player_posy"        : 0,
     "player_tile"        : 0,
@@ -487,12 +487,18 @@ def draw():
         text = font.render("Time (%, #): " + str(round(VariablesNumber["time_day_percentage"], 1)) + ", " + str(VariablesNumber["time_seconds"] // VariablesNumber["time_day_length"]), True, (255, 255, 255))
         screen.blit(text, [10, 190])
     if VariablesBoolean["menu_inventory"]:
-        screen.blit(screen_effect_inventory, (0, 0))
+        screen_effect_inventory.fill((  0,   0,   0, 128))
+    else:
+        screen_effect_inventory.fill((  0,   0,   0,   0))
+        pygame.draw.rect(screen_effect_inventory, (  0,   0,   0, 128), [0, Config["ScreenY"] - 97, Config["ScreenX"], 97])
+    screen.blit(screen_effect_inventory, (0, 0))
     for i in range(32):
         a = i // 8
         b = i % 8
         if i >= 8 and not VariablesBoolean["menu_inventory"]:
             break
+        if VariablesNumber["hotbar"] == i and not VariablesBoolean["menu_inventory"]:
+            pygame.draw.rect(screen, (255, 255, 192), [InventoryMargins[i][0] - 8, InventoryMargins[i][1] - 8, 97, 97])
         pygame.draw.rect(screen, (192, 192, 192), [InventoryMargins[i][0], InventoryMargins[i][1], 81, 81])
         if not Inventory[i][0] == "":
             screen.blit(Images[Inventory[i][0].replace(".png", "")], [InventoryMargins[i][0], InventoryMargins[i][1]])
@@ -504,13 +510,10 @@ def main():
     global screen
     global screen_effect_inventory
     global screen_effect_time
-    global screen
     clock = pygame.time.Clock()
     #Screen and screen effects
     screen = pygame.display.set_mode((Config["ScreenX"], Config["ScreenY"]))
-    screen_effect_inventory = pygame.Surface((Config["ScreenX"], Config["ScreenY"]))
-    screen_effect_inventory.set_alpha(128)
-    screen_effect_inventory.fill((  0,   0,   0))
+    screen_effect_inventory = pygame.Surface((Config["ScreenX"], Config["ScreenY"]), pygame.SRCALPHA)
     screen_effect_time = pygame.Surface((Config["ScreenX"], Config["ScreenY"]))
     screen_effect_time.set_alpha(64)
     screen_effect_time.fill((255, 128,   0))
@@ -671,6 +674,30 @@ def main():
                 sys.exit()
             #Check for key presses
             if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_1:
+                    if not VariablesBoolean["menu_inventory"]:
+                        VariablesNumber["hotbar"] = 0
+                if event.key == pygame.K_2:
+                    if not VariablesBoolean["menu_inventory"]:
+                        VariablesNumber["hotbar"] = 1
+                if event.key == pygame.K_3:
+                    if not VariablesBoolean["menu_inventory"]:
+                        VariablesNumber["hotbar"] = 2
+                if event.key == pygame.K_4:
+                    if not VariablesBoolean["menu_inventory"]:
+                        VariablesNumber["hotbar"] = 3
+                if event.key == pygame.K_5:
+                    if not VariablesBoolean["menu_inventory"]:
+                        VariablesNumber["hotbar"] = 4
+                if event.key == pygame.K_6:
+                    if not VariablesBoolean["menu_inventory"]:
+                        VariablesNumber["hotbar"] = 5
+                if event.key == pygame.K_7:
+                    if not VariablesBoolean["menu_inventory"]:
+                        VariablesNumber["hotbar"] = 6
+                if event.key == pygame.K_8:
+                    if not VariablesBoolean["menu_inventory"]:
+                        VariablesNumber["hotbar"] = 7
                 if event.key == pygame.K_a:
                     Keys["A"] = True
                 if event.key == pygame.K_d:
