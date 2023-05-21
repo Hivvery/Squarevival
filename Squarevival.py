@@ -12,53 +12,61 @@ Config = {
 }
 #Images
 Images = {
-    "entity-item-apple"         : pygame.image.load("Images/squarevival-entity-item-apple.png"         ),
-    "entity-item-bright_wood"   : pygame.image.load("Images/squarevival-entity-item-bright_wood.png"   ),
-    "entity-item-cactus_spike"  : pygame.image.load("Images/squarevival-entity-item-cactus_spike.png"  ),
-    "entity-item-coal"          : pygame.image.load("Images/squarevival-entity-item-coal.png"          ),
-    "entity-item-dark_wood"     : pygame.image.load("Images/squarevival-entity-item-dark_wood.png"     ),
-    "entity-item-diamond"       : pygame.image.load("Images/squarevival-entity-item-diamond.png"       ),
-    "entity-item-iron_bar"      : pygame.image.load("Images/squarevival-entity-item-iron_bar.png"      ),
-    "entity-item-leaf"          : pygame.image.load("Images/squarevival-entity-item-leaf.png"          ),
-    "entity-u"                  : pygame.image.load("Images/squarevival-entity-u.png"                  ),
-    "ground-cold_water"         : pygame.image.load("Images/squarevival-ground-cold_water.png"         ),
-    "ground-dark_grass"         : pygame.image.load("Images/squarevival-ground-dark_grass.png"         ),
-    "ground-dirt"               : pygame.image.load("Images/squarevival-ground-dirt.png"               ),
-    "ground-grass"              : pygame.image.load("Images/squarevival-ground-grass.png"              ),
-    "ground-ice"                : pygame.image.load("Images/squarevival-ground-ice.png"                ),
-    "ground-lava"               : pygame.image.load("Images/squarevival-ground-lava.png"               ),
-    "ground-mud"                : pygame.image.load("Images/squarevival-ground-mud.png"                ),
-    "ground-sand"               : pygame.image.load("Images/squarevival-ground-sand.png"               ),
-    "ground-sand_bricks_ground" : pygame.image.load("Images/squarevival-ground-sand_bricks_ground.png" ),
-    "ground-snow"               : pygame.image.load("Images/squarevival-ground-snow.png"               ),
-    "ground-stone_bricks_ground": pygame.image.load("Images/squarevival-ground-stone_bricks_ground.png"),
-    "ground-stone_ground"       : pygame.image.load("Images/squarevival-ground-stone_ground.png"       ),
-    "ground-warm_water"         : pygame.image.load("Images/squarevival-ground-warm_water.png"         ),
-    "ground-water"              : pygame.image.load("Images/squarevival-ground-water.png"              ),
-    "item-apple"                : pygame.image.load("Images/squarevival-item-apple.png"                ),
-    "item-bright_wood"          : pygame.image.load("Images/squarevival-item-bright_wood.png"          ),
-    "item-cactus_spike"         : pygame.image.load("Images/squarevival-item-cactus_spike.png"         ),
-    "item-coal"                 : pygame.image.load("Images/squarevival-item-coal.png"                 ),
-    "item-dark_wood"            : pygame.image.load("Images/squarevival-item-dark_wood.png"            ),
-    "item-diamond"              : pygame.image.load("Images/squarevival-item-diamond.png"              ),
-    "item-iron_bar"             : pygame.image.load("Images/squarevival-item-iron_bar.png"             ),
-    "item-leaf"                 : pygame.image.load("Images/squarevival-item-leaf.png"                 ),
-    "object-apple_tree"         : pygame.image.load("Images/squarevival-object-apple_tree.png"         ),
-    "object-box"                : pygame.image.load("Images/squarevival-object-box.png"                ),
-    "object-bright_tree"        : pygame.image.load("Images/squarevival-object-bright_tree.png"        ),
-    "object-bright_wood"        : pygame.image.load("Images/squarevival-object-bright_wood.png"        ),
-    "object-cactus"             : pygame.image.load("Images/squarevival-object-cactus.png"             ),
-    "object-cave"               : pygame.image.load("Images/squarevival-object-cave.png"               ),
-    "object-christmas_tree"     : pygame.image.load("Images/squarevival-object-christmas_tree.png"     ),
-    "object-coal_ore"           : pygame.image.load("Images/squarevival-object-coal_ore.png"           ),
-    "object-dark_tree"          : pygame.image.load("Images/squarevival-object-dark_tree.png"          ),
-    "object-dark_wood"          : pygame.image.load("Images/squarevival-object-dark_wood.png"          ),
-    "object-diamond_ore"        : pygame.image.load("Images/squarevival-object-diamond_ore.png"        ),
-    "object-iron_ore"           : pygame.image.load("Images/squarevival-object-iron_ore.png"           ),
-    "object-sand_bricks"        : pygame.image.load("Images/squarevival-object-sand_bricks.png"        ),
-    "object-stone"              : pygame.image.load("Images/squarevival-object-stone.png"              ),
-    "object-stone_bricks"       : pygame.image.load("Images/squarevival-object-stone_bricks.png"       ),
-    "object-torch"              : pygame.image.load("Images/squarevival-object-torch.png"              ),
+    "entity-item-apple"          : pygame.image.load("Images/squarevival-entity-item-apple.png"          ),
+    "entity-item-bright_wood"    : pygame.image.load("Images/squarevival-entity-item-bright_wood.png"    ),
+    "entity-item-cactus_spike"   : pygame.image.load("Images/squarevival-entity-item-cactus_spike.png"   ),
+    "entity-item-coal"           : pygame.image.load("Images/squarevival-entity-item-coal.png"           ),
+    "entity-item-dark_grass_seed": pygame.image.load("Images/squarevival-entity-item-dark_grass_seed.png"),
+    "entity-item-dark_wood"      : pygame.image.load("Images/squarevival-entity-item-dark_wood.png"      ),
+    "entity-item-diamond"        : pygame.image.load("Images/squarevival-entity-item-diamond.png"        ),
+    "entity-item-grass_seed"     : pygame.image.load("Images/squarevival-entity-item-grass_seed.png"     ),
+    "entity-item-iron_bar"       : pygame.image.load("Images/squarevival-entity-item-iron_bar.png"       ),
+    "entity-item-leaf"           : pygame.image.load("Images/squarevival-entity-item-leaf.png"           ),
+    "entity-item-sand"           : pygame.image.load("Images/squarevival-entity-item-sand.png"           ),
+    "entity-item-snow"           : pygame.image.load("Images/squarevival-entity-item-snow.png"           ),
+    "entity-u"                   : pygame.image.load("Images/squarevival-entity-u.png"                   ),
+    "ground-cold_water"          : pygame.image.load("Images/squarevival-ground-cold_water.png"          ),
+    "ground-dark_grass"          : pygame.image.load("Images/squarevival-ground-dark_grass.png"          ),
+    "ground-dirt"                : pygame.image.load("Images/squarevival-ground-dirt.png"                ),
+    "ground-grass"               : pygame.image.load("Images/squarevival-ground-grass.png"               ),
+    "ground-ice"                 : pygame.image.load("Images/squarevival-ground-ice.png"                 ),
+    "ground-lava"                : pygame.image.load("Images/squarevival-ground-lava.png"                ),
+    "ground-mud"                 : pygame.image.load("Images/squarevival-ground-mud.png"                 ),
+    "ground-sand"                : pygame.image.load("Images/squarevival-ground-sand.png"                ),
+    "ground-sand_bricks_ground"  : pygame.image.load("Images/squarevival-ground-sand_bricks_ground.png"  ),
+    "ground-snow"                : pygame.image.load("Images/squarevival-ground-snow.png"                ),
+    "ground-stone_bricks_ground" : pygame.image.load("Images/squarevival-ground-stone_bricks_ground.png" ),
+    "ground-stone_ground"        : pygame.image.load("Images/squarevival-ground-stone_ground.png"        ),
+    "ground-warm_water"          : pygame.image.load("Images/squarevival-ground-warm_water.png"          ),
+    "ground-water"               : pygame.image.load("Images/squarevival-ground-water.png"               ),
+    "item-apple"                 : pygame.image.load("Images/squarevival-item-apple.png"                 ),
+    "item-bright_wood"           : pygame.image.load("Images/squarevival-item-bright_wood.png"           ),
+    "item-cactus_spike"          : pygame.image.load("Images/squarevival-item-cactus_spike.png"          ),
+    "item-coal"                  : pygame.image.load("Images/squarevival-item-coal.png"                  ),
+    "item-dark_grass_seed"       : pygame.image.load("Images/squarevival-item-dark_grass_seed.png"       ),
+    "item-dark_wood"             : pygame.image.load("Images/squarevival-item-dark_wood.png"             ),
+    "item-diamond"               : pygame.image.load("Images/squarevival-item-diamond.png"               ),
+    "item-grass_seed"            : pygame.image.load("Images/squarevival-item-grass_seed.png"            ),
+    "item-iron_bar"              : pygame.image.load("Images/squarevival-item-iron_bar.png"              ),
+    "item-leaf"                  : pygame.image.load("Images/squarevival-item-leaf.png"                  ),
+    "item-sand"                  : pygame.image.load("Images/squarevival-item-sand.png"                  ),
+    "item-snow"                  : pygame.image.load("Images/squarevival-item-snow.png"                  ),
+    "object-apple_tree"          : pygame.image.load("Images/squarevival-object-apple_tree.png"          ),
+    "object-box"                 : pygame.image.load("Images/squarevival-object-box.png"                 ),
+    "object-bright_tree"         : pygame.image.load("Images/squarevival-object-bright_tree.png"         ),
+    "object-bright_wood"         : pygame.image.load("Images/squarevival-object-bright_wood.png"         ),
+    "object-cactus"              : pygame.image.load("Images/squarevival-object-cactus.png"              ),
+    "object-cave"                : pygame.image.load("Images/squarevival-object-cave.png"                ),
+    "object-christmas_tree"      : pygame.image.load("Images/squarevival-object-christmas_tree.png"      ),
+    "object-coal_ore"            : pygame.image.load("Images/squarevival-object-coal_ore.png"            ),
+    "object-dark_tree"           : pygame.image.load("Images/squarevival-object-dark_tree.png"           ),
+    "object-dark_wood"           : pygame.image.load("Images/squarevival-object-dark_wood.png"           ),
+    "object-diamond_ore"         : pygame.image.load("Images/squarevival-object-diamond_ore.png"         ),
+    "object-iron_ore"            : pygame.image.load("Images/squarevival-object-iron_ore.png"            ),
+    "object-sand_bricks"         : pygame.image.load("Images/squarevival-object-sand_bricks.png"         ),
+    "object-stone"               : pygame.image.load("Images/squarevival-object-stone.png"               ),
+    "object-stone_bricks"        : pygame.image.load("Images/squarevival-object-stone_bricks.png"        ),
+    "object-torch"               : pygame.image.load("Images/squarevival-object-torch.png"               ),
 }
 #Pressed keys
 Keys = {
@@ -191,55 +199,7 @@ VariablesNumber["camera_z"]
 #Grid[?][5]: Object
 Grid = [[0, 0, 0, "Ocean", "ground-water", ""] for a in range(Settings["GridW"] * Settings["GridH"])]
 #Images list
-ImagesList = [
-    "entity-item-apple"         ,
-    "entity-item-bright_wood"   ,
-    "entity-item-cactus_spike"  ,
-    "entity-item-coal"          ,
-    "entity-item-dark_wood"     ,
-    "entity-item-diamond"       ,
-    "entity-item-iron_bar"      ,
-    "entity-item-leaf"          ,
-    "entity-u"                  ,
-    "ground-cold_water"         ,
-    "ground-dark_grass"         ,
-    "ground-dirt"               ,
-    "ground-grass"              ,
-    "ground-ice"                ,
-    "ground-lava"               ,
-    "ground-mud"                ,
-    "ground-sand"               ,
-    "ground-sand_bricks_ground" ,
-    "ground-snow"               ,
-    "ground-stone_bricks_ground",
-    "ground-stone_ground"       ,
-    "ground-warm_water"         ,
-    "ground-water"              ,
-    "item-apple"                ,
-    "item-bright_wood"          ,
-    "item-cactus_spike"         ,
-    "item-coal"                 ,
-    "item-dark_wood"            ,
-    "item-diamond"              ,
-    "item-iron_bar"             ,
-    "item-leaf"                 ,
-    "object-apple_tree"         ,
-    "object-box"                ,
-    "object-bright_tree"        ,
-    "object-bright_wood"        ,
-    "object-cactus"             ,
-    "object-cave"               ,
-    "object-christmas_tree"     ,
-    "object-coal_ore"           ,
-    "object-dark_tree"          ,
-    "object-dark_wood"          ,
-    "object-diamond_ore"        ,
-    "object-iron_ore"           ,
-    "object-sand_bricks"        ,
-    "object-stone"              ,
-    "object-stone_bricks"       ,
-    "object-torch"              ,
-]
+ImagesList = [i for i in Images]
 #Inventory
 Inventory = [["", 0] for a in range(32)]
 InventoryMargins =  [[(i % 8) * 89 + 8, (i // 8) * -89 + Config["ScreenY"] - 89] for i in range(32)]
@@ -339,34 +299,68 @@ class Tile(pygame.sprite.Sprite):
     def update(self):
         if self.rect.collidepoint(pygame.mouse.get_pos()):
             if pygame.mouse.get_pressed()[0] == 1:
-                if not Grid[self.id][5] == "":
+                if not "ground-cold_water, ground-dirt, ground-stone_ground, ground-water, ground-warm_water".__contains__(Grid[self.id][4]):
+                    if Grid[self.id][4] == "ground-dark_grass":
+                        if random.randrange(0, 100) <= 10:
+                            itementity("entity-item-dark_grass_seed", self.posx, self.posy)
+                    if Grid[self.id][4] == "ground-grass":
+                        if random.randrange(0, 100) <= 10:
+                            itementity("entity-item-grass_seed", self.posx, self.posy)
+                    if Grid[self.id][4] == "ground-sand":
+                        itementity("entity-item-sand", self.posx, self.posy)
+                    if Grid[self.id][4] == "ground-snow":
+                        itementity("entity-item-snow", self.posx, self.posy)
+                    Grid[self.id][4] = "ground-dirt"
+                if not "object-cave".__contains__(Grid[self.id][5]):
                     if Grid[self.id][5] == "object-apple_tree":
-                        itementity("entity-item-bright_wood", self.posx + random.randrange(-4, 4) * Settings["TileSize"] / 16, self.posy + random.randrange(-4, 4) * Settings["TileSize"] / 16)
+                        itementity("entity-item-bright_wood", self.posx, self.posy)
                         if random.randrange(0, 100) <= 50:
-                            itementity("entity-item-apple", self.posx + random.randrange(-4, 4) * Settings["TileSize"] / 16, self.posy + random.randrange(-4, 4) * Settings["TileSize"] / 16)
+                            itementity("entity-item-apple", self.posx, self.posy)
                     elif Grid[self.id][5] == "object-bright_tree":
-                        itementity("entity-item-bright_wood", self.posx + random.randrange(-4, 4) * Settings["TileSize"] / 16, self.posy + random.randrange(-4, 4) * Settings["TileSize"] / 16)
+                        itementity("entity-item-bright_wood", self.posx, self.posy)
                         if random.randrange(0, 100) <= 50:
-                            itementity("entity-item-bright_wood", self.posx + random.randrange(-4, 4) * Settings["TileSize"] / 16, self.posy + random.randrange(-4, 4) * Settings["TileSize"] / 16)
+                            itementity("entity-item-bright_wood", self.posx, self.posy)
+                    elif Grid[self.id][5] == "object-bright_wood":
+                        itementity("entity-item-bright_wood", self.posx, self.posy)
                     elif Grid[self.id][5] == "object-cactus":
                         if random.randrange(0, 100) <= 25:
-                            itementity("entity-item-cactus_spike", self.posx + random.randrange(-4, 4) * Settings["TileSize"] / 16, self.posy + random.randrange(-4, 4) * Settings["TileSize"] / 16)
+                            itementity("entity-item-cactus_spike", self.posx, self.posy)
                     elif Grid[self.id][5] == "object-coal_ore":
-                        itementity("entity-item-coal", self.posx + random.randrange(-4, 4) * Settings["TileSize"] / 16, self.posy + random.randrange(-4, 4) * Settings["TileSize"] / 16)
+                        itementity("entity-item-coal", self.posx, self.posy)
                         if random.randrange(0, 100) <= 20:
-                            itementity("entity-item-coal", self.posx + random.randrange(-4, 4) * Settings["TileSize"] / 16, self.posy + random.randrange(-4, 4) * Settings["TileSize"] / 16)
+                            itementity("entity-item-coal", self.posx, self.posy)
                     elif Grid[self.id][5] == "object-dark_tree":
-                        itementity("entity-item-dark_wood", self.posx + random.randrange(-4, 4) * Settings["TileSize"] / 16, self.posy + random.randrange(-4, 4) * Settings["TileSize"] / 16)
+                        itementity("entity-item-dark_wood", self.posx, self.posy)
                         if random.randrange(0, 100) <= 50:
-                            itementity("entity-item-dark_wood", self.posx + random.randrange(-4, 4) * Settings["TileSize"] / 16, self.posy + random.randrange(-4, 4) * Settings["TileSize"] / 16)
+                            itementity("entity-item-dark_wood", self.posx, self.posy)
+                    elif Grid[self.id][5] == "object-dark_wood":
+                        itementity("entity-item-dark_wood", self.posx, self.posy)
                     elif Grid[self.id][5] == "object-diamond_ore":
-                        itementity("entity-item-diamond", self.posx + random.randrange(-4, 4) * Settings["TileSize"] / 16, self.posy + random.randrange(-4, 4) * Settings["TileSize"] / 16)
+                        itementity("entity-item-diamond", self.posx, self.posy)
                     elif Grid[self.id][5] == "object-iron_ore":
-                        itementity("entity-item-iron_bar", self.posx + random.randrange(-4, 4) * Settings["TileSize"] / 16, self.posy + random.randrange(-4, 4) * Settings["TileSize"] / 16)
+                        itementity("entity-item-iron_bar", self.posx, self.posy)
                         if random.randrange(0, 100) <= 10:
-                            itementity("entity-item-iron_bar", self.posx + random.randrange(-4, 4) * Settings["TileSize"] / 16, self.posy + random.randrange(-4, 4) * Settings["TileSize"] / 16)
+                            itementity("entity-item-iron_bar", self.posx, self.posy)
                     Grid[self.id][5] = ""
-                Grid[self.id][4] = "ground-dirt"
+            if pygame.mouse.get_pressed()[2] == 1 and Grid[self.id][5] == "":
+                if Inventory[VariablesNumber["hotbar"]][0] == "item-bright_wood":
+                    Grid[self.id][5] = "object-bright_wood"
+                    itemremove(VariablesNumber["hotbar"])
+                if Inventory[VariablesNumber["hotbar"]][0] == "item-dark_wood":
+                    Grid[self.id][5] = "object-dark_wood"
+                    itemremove(VariablesNumber["hotbar"])
+        if Grid[self.id][4] == "ground-dirt" and random.randint(0, 100) <= 0.01:
+            if "ground-grass" in Grid[self.id - Settings["GridW"]][4] + Grid[self.id - 1][4] + Grid[self.id + 1][4] + Grid[self.id + Settings["GridW"]][4]:
+                if "ground-dark_grass" in Grid[self.id - Settings["GridW"]][4] + Grid[self.id - 1][4] + Grid[self.id + 1][4] + Grid[self.id + Settings["GridW"]][4]:
+                    if random.randrange(0, 100) <= 50:
+                        Grid[self.id][4] = "ground-grass"
+                    else:
+                        Grid[self.id][4] = "ground-dark_grass"
+                else:
+                    Grid[self.id][4] = "ground-grass"
+            else:
+                if "ground-dark_grass" in Grid[self.id - Settings["GridW"]][4] + Grid[self.id - 1][4] + Grid[self.id + 1][4] + Grid[self.id + Settings["GridW"]][4]:
+                    Grid[self.id][4] = "ground-dark_grass"
         if not Grid[self.id][4] == "":
             self.image = Images[Grid[self.id][4]]
         self.rect.center = ((self.posx - VariablesNumber["camera_x"]) * VariablesNumber["camera_z"] + Config["ScreenX"] / 2, (self.posy - VariablesNumber["camera_y"]) * VariablesNumber["camera_z"] + Config["ScreenY"] / 2)
@@ -384,8 +378,13 @@ def item(item):
             break
 #Create an item entity
 def itementity(item, posx, posy):
-    sprite = Entity(0, item, posx, posy, Settings["TileSize"] / 2, Settings["TileSize"] / 2)
+    sprite = Entity(0, item, posx + random.randrange(-4, 4) * Settings["TileSize"] / 16, posy + random.randrange(-4, 4) * Settings["TileSize"] / 16, Settings["TileSize"] / 2, Settings["TileSize"] / 2)
     sprites_group_entity.add(sprite)
+#Remove an item from the inventory
+def itemremove(item_number):
+    Inventory[item_number][1] -= 1
+    if Inventory[item_number][1] == 0:
+        Inventory[item_number][0] = ""
 #Make an island structure
 def structure_island(tile):
     global structure_depth
@@ -553,7 +552,7 @@ def main():
         elif Grid[a][0] <= 0.1:
             if Grid[a][1] <= -0.33:
                 Grid[a][3] = "Cold Ocean"
-                if random.randint(0, 100) <= Grid[a][1] * -400 - 300:
+                if random.randrange(0, 100) <= Grid[a][1] * -400 - 300:
                     Grid[a][4] = "ground-ice"
                 else:
                     Grid[a][4] = "ground-cold_water"
