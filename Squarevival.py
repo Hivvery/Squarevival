@@ -182,6 +182,8 @@ VariablesNumber = {
     "player_tileposy"    : 0,
     "player_vel"         : 0,
     "structure_depth"    : 0,
+    "tile_posx"          : 0,
+    "tile_posy"          : 0,
     "time_day_length"    : 300,
     "time_day_percentage": 0,
     "time_frames"        : 0,
@@ -346,10 +348,22 @@ class Tile(pygame.sprite.Sprite):
                 if Inventory[VariablesNumber["hotbar"]][0] == "item-bright_wood":
                     Grid[self.id][5] = "object-bright_wood"
                     itemremove(VariablesNumber["hotbar"])
+                if Inventory[VariablesNumber["hotbar"]][0] == "item-dark_grass_seed" and not Grid[self.id][4] == "ground-dark_grass":
+                    Grid[self.id][4] = "ground-dark_grass"
+                    itemremove(VariablesNumber["hotbar"])
                 if Inventory[VariablesNumber["hotbar"]][0] == "item-dark_wood":
                     Grid[self.id][5] = "object-dark_wood"
                     itemremove(VariablesNumber["hotbar"])
-        if Grid[self.id][4] == "ground-dirt" and random.randint(0, 100) <= 0.01:
+                if Inventory[VariablesNumber["hotbar"]][0] == "item-grass_seed" and not Grid[self.id][4] == "ground-grass":
+                    Grid[self.id][4] = "ground-grass"
+                    itemremove(VariablesNumber["hotbar"])
+                if Inventory[VariablesNumber["hotbar"]][0] == "item-sand" and not Grid[self.id][4] == "ground-sand":
+                    Grid[self.id][4] = "ground-sand"
+                    itemremove(VariablesNumber["hotbar"])
+                if Inventory[VariablesNumber["hotbar"]][0] == "item-snow" and not Grid[self.id][4] == "ground-snow":
+                    Grid[self.id][4] = "ground-snow"
+                    itemremove(VariablesNumber["hotbar"])
+        if Grid[self.id][4] == "ground-dirt" and random.randint(0, 100) <= 0.0001:
             if "ground-grass" in Grid[self.id - Settings["GridW"]][4] + Grid[self.id - 1][4] + Grid[self.id + 1][4] + Grid[self.id + Settings["GridW"]][4]:
                 if "ground-dark_grass" in Grid[self.id - Settings["GridW"]][4] + Grid[self.id - 1][4] + Grid[self.id + 1][4] + Grid[self.id + Settings["GridW"]][4]:
                     if random.randrange(0, 100) <= 50:
@@ -366,6 +380,9 @@ class Tile(pygame.sprite.Sprite):
         self.rect.center = ((self.posx - VariablesNumber["camera_x"]) * VariablesNumber["camera_z"] + Config["ScreenX"] / 2, (self.posy - VariablesNumber["camera_y"]) * VariablesNumber["camera_z"] + Config["ScreenY"] / 2)
 
 #FUNCTIONS
+def find_tile_pos(tile):
+    VariablesNumber["tile_posx"] = (((tile + 0.5) % Settings["GridW"] * Settings["TileSize"] - Settings["TileSize"] / 2) - VariablesNumber["camera_x"]) * VariablesNumber["camera_z"] + Config["ScreenX"] / 2
+    VariablesNumber["tile_posy"] = ((round((tile - ((Settings["GridW"] - 1) / 2)) / Settings["GridW"]) * Settings["TileSize"]) - VariablesNumber["camera_y"]) * VariablesNumber["camera_z"] + Config["ScreenY"] / 2
 #Add an item to the inventory
 def item(item):
     for a in range(len(Inventory)):
@@ -460,9 +477,11 @@ def structure_lake(tile):
 def draw():
     screen.fill((  0,   0,   0))
     sprites_group_tile.draw(screen)
-    for a in range(len(Grid)):
-        if not Grid[a][5] == "":
-            screen.blit(Images[Grid[a][5]], [(((a + 0.5) % Settings["GridW"] * Settings["TileSize"] - Settings["TileSize"] / 2) - VariablesNumber["camera_x"]) * VariablesNumber["camera_z"] + Config["ScreenX"] / 2, ((round((a - ((Settings["GridW"] - 1) / 2)) / Settings["GridW"]) * Settings["TileSize"]) - VariablesNumber["camera_y"]) * VariablesNumber["camera_z"] + Config["ScreenY"] / 2])
+    for i in range(len(Grid)):
+        find_tile_pos(i)
+        screen.blit(Images[Grid[i][4]], [VariablesNumber["tile_posx"], VariablesNumber["tile_posy"]])
+        if not Grid[i][5] == "":
+            screen.blit(Images[Grid[i][5]], [VariablesNumber["tile_posx"], VariablesNumber["tile_posy"]])
     sprites_group_entity.draw(screen)
     screen.blit(screen_effect_time, (0, 0))
     if VariablesBoolean["menu_debug"] and not VariablesBoolean["menu_inventory"]:
