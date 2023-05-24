@@ -23,6 +23,7 @@ Images = {
     "entity-item-ice"            : pygame.image.load("Images/squarevival-entity-item-ice.png"            ),
     "entity-item-iron_bar"       : pygame.image.load("Images/squarevival-entity-item-iron_bar.png"       ),
     "entity-item-leaf"           : pygame.image.load("Images/squarevival-entity-item-leaf.png"           ),
+    "entity-item-mud"            : pygame.image.load("Images/squarevival-entity-item-mud.png"            ),
     "entity-item-sand"           : pygame.image.load("Images/squarevival-entity-item-sand.png"           ),
     "entity-item-snow"           : pygame.image.load("Images/squarevival-entity-item-snow.png"           ),
     "entity-u"                   : pygame.image.load("Images/squarevival-entity-u.png"                   ),
@@ -51,6 +52,7 @@ Images = {
     "item-ice"                   : pygame.image.load("Images/squarevival-item-ice.png"                   ),
     "item-iron_bar"              : pygame.image.load("Images/squarevival-item-iron_bar.png"              ),
     "item-leaf"                  : pygame.image.load("Images/squarevival-item-leaf.png"                  ),
+    "item-mud"                   : pygame.image.load("Images/squarevival-item-mud.png"                   ),
     "item-sand"                  : pygame.image.load("Images/squarevival-item-sand.png"                  ),
     "item-snow"                  : pygame.image.load("Images/squarevival-item-snow.png"                  ),
     "object-apple_tree"          : pygame.image.load("Images/squarevival-object-apple_tree.png"          ),
@@ -302,8 +304,9 @@ class Tile(pygame.sprite.Sprite):
         self.rect.center = ((self.posx - VariablesNumber["camera_x"]) * VariablesNumber["camera_z"] + Config["ScreenX"] / 2, (self.posy - VariablesNumber["camera_y"]) * VariablesNumber["camera_z"] + Config["ScreenY"] / 2)
     def update(self):
         if self.rect.collidepoint(pygame.mouse.get_pos()):
+            #Destroying objects/tiles
             if pygame.mouse.get_pressed()[0] == 1:
-                if not "ground-cold_water, ground-dirt, ground-stone_ground, ground-warm_water, ground-water".__contains__(Grid[self.id][4]):
+                if not Grid[self.id][4] in "ground-cold_water, ground-dirt, ground-stone_ground, ground-warm_water, ground-water":
                     if Grid[self.id][4] == "ground-dark_grass":
                         if random.randrange(0, 100) <= 10:
                             itementity("entity-item-dark_grass_seed", self.posx, self.posy)
@@ -312,6 +315,8 @@ class Tile(pygame.sprite.Sprite):
                             itementity("entity-item-grass_seed", self.posx, self.posy)
                     if Grid[self.id][4] == "ground-ice":
                         itementity("entity-item-ice", self.posx, self.posy)
+                    if Grid[self.id][4] == "ground-mud":
+                        itementity("entity-item-mud", self.posx, self.posy)
                     if Grid[self.id][4] == "ground-sand":
                         itementity("entity-item-sand", self.posx, self.posy)
                     if Grid[self.id][4] == "ground-snow":
@@ -348,6 +353,7 @@ class Tile(pygame.sprite.Sprite):
                         if random.randrange(0, 100) <= 10:
                             itementity("entity-item-iron_bar", self.posx, self.posy)
                     Grid[self.id][5] = ""
+            #Placing items
             if pygame.mouse.get_pressed()[2] == 1 and Grid[self.id][5] == "":
                 if Inventory[VariablesNumber["hotbar"]][0] == "item-bright_wood":
                     Grid[self.id][5] = "object-bright_wood"
@@ -361,15 +367,19 @@ class Tile(pygame.sprite.Sprite):
                 if Inventory[VariablesNumber["hotbar"]][0] == "item-grass_seed" and Grid[self.id][4] == "ground-dirt":
                     Grid[self.id][4] = "ground-grass"
                     itemremove(VariablesNumber["hotbar"])
-                if Inventory[VariablesNumber["hotbar"]][0] == "item-ice" and Grid[self.id][4] in "ground-cold_water ground-dirt, ground-warm_water, ground-water":
+                if Inventory[VariablesNumber["hotbar"]][0] == "item-ice" and Grid[self.id][4] in "ground-cold_water ground-dark_grass, ground-dirt, ground-grass, ground-warm_water, ground-water":
                     Grid[self.id][4] = "ground-ice"
                     itemremove(VariablesNumber["hotbar"])
-                if Inventory[VariablesNumber["hotbar"]][0] == "item-sand" and Grid[self.id][4] in "ground-cold_water ground-dirt, ground-warm_water, ground-water":
+                if Inventory[VariablesNumber["hotbar"]][0] == "item-mud" and Grid[self.id][4] in "ground-cold_water ground-dark_grass, ground-dirt, ground-grass, ground-warm_water, ground-water":
+                    Grid[self.id][4] = "ground-mud"
+                    itemremove(VariablesNumber["hotbar"])
+                if Inventory[VariablesNumber["hotbar"]][0] == "item-sand" and Grid[self.id][4] in "ground-cold_water ground-dark_grass, ground-dirt, ground-grass, ground-warm_water, ground-water":
                     Grid[self.id][4] = "ground-sand"
                     itemremove(VariablesNumber["hotbar"])
-                if Inventory[VariablesNumber["hotbar"]][0] == "item-snow" and Grid[self.id][4] in "ground-cold_water ground-dirt, ground-warm_water, ground-water":
+                if Inventory[VariablesNumber["hotbar"]][0] == "item-snow" and Grid[self.id][4] in "ground-cold_water ground-dark_grass, ground-dirt, ground-grass, ground-warm_water, ground-water":
                     Grid[self.id][4] = "ground-snow"
                     itemremove(VariablesNumber["hotbar"])
+        #Grass spreading
         if Grid[self.id][4] == "ground-dirt" and random.randint(0, 100) <= 0.0001:
             if "ground-grass" in Grid[self.id - Settings["GridW"]][4] + Grid[self.id - 1][4] + Grid[self.id + 1][4] + Grid[self.id + Settings["GridW"]][4]:
                 if "ground-dark_grass" in Grid[self.id - Settings["GridW"]][4] + Grid[self.id - 1][4] + Grid[self.id + 1][4] + Grid[self.id + Settings["GridW"]][4]:
@@ -491,6 +501,7 @@ def draw():
             screen.blit(Images[Grid[i][5]], [VariablesNumber["tile_posx"], VariablesNumber["tile_posy"]])
     sprites_group_entity.draw(screen)
     screen.blit(screen_effect_time, (0, 0))
+    #Draw the debug screen
     if VariablesBoolean["menu_debug"] and not VariablesBoolean["menu_inventory"]:
         pygame.draw.rect(screen, (  0,   0,   0), [5, 5, Config["ScreenX"] - 10, 210])
         font = pygame.font.SysFont("bahnschrift", 20)
@@ -511,6 +522,7 @@ def draw():
         screen.blit(text, [10, 160])
         text = font.render("Time (%, #): " + str(round(VariablesNumber["time_day_percentage"], 1)) + ", " + str(VariablesNumber["time_seconds"] // VariablesNumber["time_day_length"]), True, (255, 255, 255))
         screen.blit(text, [10, 190])
+    #Draw the hotbar/inventory
     if VariablesBoolean["menu_inventory"]:
         screen_effect_inventory.fill((  0,   0,   0, 128))
     else:
@@ -674,19 +686,19 @@ def main():
     #Make islands
     for a in range(round(len(Grid) / 1600)):
         structure_tile = random.randint(0, len(Grid))
-        if "ground-warm_water, ground-water".__contains__(Grid[structure_tile][4]) and Grid[structure_tile][0] <= 0.1 and Grid[structure_tile][1] >= -0.1:
+        if Grid[structure_tile][4] in "ground-warm_water, ground-water" and Grid[structure_tile][0] <= 0.1 and Grid[structure_tile][1] >= -0.1:
             structure_island(structure_tile)
     #Make lakes
     for a in range(round(len(Grid) / 800)):
         structure_tile = random.randint(0, len(Grid))
-        if not "ground-cold_water, ground-ice, ground-warm_water, ground-water".__contains__(Grid[structure_tile][4]):
+        if not Grid[structure_tile][4] in "ground-cold_water, ground-ice, ground-warm_water, ground-water":
             structure_lake(structure_tile)
     #Make caves
     for a in range(round(len(Grid) / 800)):
         structure_tile = random.randint(0, len(Grid))
-        while not "ground-dark_grass, ground-grass, ground-snow".__contains__(Grid[structure_tile][4]):
+        while not Grid[structure_tile][4] in "ground-dark_grass, ground-grass, ground-snow":
             structure_tile = random.randint(0, len(Grid))
-        if "ground-dark_grass, ground-grass, ground-snow".__contains__(Grid[structure_tile][4]):
+        if Grid[structure_tile][4] in "ground-dark_grass, ground-grass, ground-snow":
             Grid[structure_tile][5] = "object-cave"
     #Make the player
     sprite = Entity(0, "entity-u", Config["ScreenX"] / 2, Config["ScreenY"] / 2, Settings["TileSize"], Settings["TileSize"])
