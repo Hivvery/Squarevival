@@ -20,6 +20,7 @@ Images = {
     "entity-item-dark_wood"      : pygame.image.load("Images/squarevival-entity-item-dark_wood.png"      ),
     "entity-item-diamond"        : pygame.image.load("Images/squarevival-entity-item-diamond.png"        ),
     "entity-item-grass_seed"     : pygame.image.load("Images/squarevival-entity-item-grass_seed.png"     ),
+    "entity-item-ice"            : pygame.image.load("Images/squarevival-entity-item-ice.png"            ),
     "entity-item-iron_bar"       : pygame.image.load("Images/squarevival-entity-item-iron_bar.png"       ),
     "entity-item-leaf"           : pygame.image.load("Images/squarevival-entity-item-leaf.png"           ),
     "entity-item-sand"           : pygame.image.load("Images/squarevival-entity-item-sand.png"           ),
@@ -47,6 +48,7 @@ Images = {
     "item-dark_wood"             : pygame.image.load("Images/squarevival-item-dark_wood.png"             ),
     "item-diamond"               : pygame.image.load("Images/squarevival-item-diamond.png"               ),
     "item-grass_seed"            : pygame.image.load("Images/squarevival-item-grass_seed.png"            ),
+    "item-ice"                   : pygame.image.load("Images/squarevival-item-ice.png"                   ),
     "item-iron_bar"              : pygame.image.load("Images/squarevival-item-iron_bar.png"              ),
     "item-leaf"                  : pygame.image.load("Images/squarevival-item-leaf.png"                  ),
     "item-sand"                  : pygame.image.load("Images/squarevival-item-sand.png"                  ),
@@ -301,13 +303,15 @@ class Tile(pygame.sprite.Sprite):
     def update(self):
         if self.rect.collidepoint(pygame.mouse.get_pos()):
             if pygame.mouse.get_pressed()[0] == 1:
-                if not "ground-cold_water, ground-dirt, ground-stone_ground, ground-water, ground-warm_water".__contains__(Grid[self.id][4]):
+                if not "ground-cold_water, ground-dirt, ground-stone_ground, ground-warm_water, ground-water".__contains__(Grid[self.id][4]):
                     if Grid[self.id][4] == "ground-dark_grass":
                         if random.randrange(0, 100) <= 10:
                             itementity("entity-item-dark_grass_seed", self.posx, self.posy)
                     if Grid[self.id][4] == "ground-grass":
                         if random.randrange(0, 100) <= 10:
                             itementity("entity-item-grass_seed", self.posx, self.posy)
+                    if Grid[self.id][4] == "ground-ice":
+                        itementity("entity-item-ice", self.posx, self.posy)
                     if Grid[self.id][4] == "ground-sand":
                         itementity("entity-item-sand", self.posx, self.posy)
                     if Grid[self.id][4] == "ground-snow":
@@ -348,19 +352,22 @@ class Tile(pygame.sprite.Sprite):
                 if Inventory[VariablesNumber["hotbar"]][0] == "item-bright_wood":
                     Grid[self.id][5] = "object-bright_wood"
                     itemremove(VariablesNumber["hotbar"])
-                if Inventory[VariablesNumber["hotbar"]][0] == "item-dark_grass_seed" and not Grid[self.id][4] == "ground-dark_grass":
+                if Inventory[VariablesNumber["hotbar"]][0] == "item-dark_grass_seed" and Grid[self.id][4] == "ground-dirt":
                     Grid[self.id][4] = "ground-dark_grass"
                     itemremove(VariablesNumber["hotbar"])
                 if Inventory[VariablesNumber["hotbar"]][0] == "item-dark_wood":
                     Grid[self.id][5] = "object-dark_wood"
                     itemremove(VariablesNumber["hotbar"])
-                if Inventory[VariablesNumber["hotbar"]][0] == "item-grass_seed" and not Grid[self.id][4] == "ground-grass":
+                if Inventory[VariablesNumber["hotbar"]][0] == "item-grass_seed" and Grid[self.id][4] == "ground-dirt":
                     Grid[self.id][4] = "ground-grass"
                     itemremove(VariablesNumber["hotbar"])
-                if Inventory[VariablesNumber["hotbar"]][0] == "item-sand" and not Grid[self.id][4] == "ground-sand":
+                if Inventory[VariablesNumber["hotbar"]][0] == "item-ice" and Grid[self.id][4] in "ground-cold_water ground-dirt, ground-warm_water, ground-water":
+                    Grid[self.id][4] = "ground-ice"
+                    itemremove(VariablesNumber["hotbar"])
+                if Inventory[VariablesNumber["hotbar"]][0] == "item-sand" and Grid[self.id][4] in "ground-cold_water ground-dirt, ground-warm_water, ground-water":
                     Grid[self.id][4] = "ground-sand"
                     itemremove(VariablesNumber["hotbar"])
-                if Inventory[VariablesNumber["hotbar"]][0] == "item-snow" and not Grid[self.id][4] == "ground-snow":
+                if Inventory[VariablesNumber["hotbar"]][0] == "item-snow" and Grid[self.id][4] in "ground-cold_water ground-dirt, ground-warm_water, ground-water":
                     Grid[self.id][4] = "ground-snow"
                     itemremove(VariablesNumber["hotbar"])
         if Grid[self.id][4] == "ground-dirt" and random.randint(0, 100) <= 0.0001:
@@ -418,16 +425,16 @@ def structure_island(tile):
                     Grid[tile][5] = "object-apple_tree"
                 else:
                     Grid[tile][5] = "object-bright_tree"
-    if tile > Settings["GridW"] and "ground-cold_water, ground-water, ground-warm_water".__contains__(Grid[tile - Settings["GridW"]][4]):
+    if tile > Settings["GridW"] and "ground-cold_water, ground-warm_water, ground-water".__contains__(Grid[tile - Settings["GridW"]][4]):
             Grid[tile - Settings["GridW"]][4] = "ground-sand"
             Grid[tile - Settings["GridW"]][5] = ""
-    if tile > 0 and "ground-cold_water, ground-water, ground-warm_water".__contains__(Grid[tile - 1][4]):
+    if tile > 0 and "ground-cold_water, ground-warm_water, ground-water".__contains__(Grid[tile - 1][4]):
         Grid[tile - 1][4] = "ground-sand"
         Grid[tile - 1][5] = ""
-    if tile < len(Grid) - 1 and "ground-cold_water, ground-water, ground-warm_water".__contains__(Grid[tile + 1][4]):
+    if tile < len(Grid) - 1 and "ground-cold_water, ground-warm_water, ground-water".__contains__(Grid[tile + 1][4]):
         Grid[tile + 1][4] = "ground-sand"
         Grid[tile + 1][5] = ""
-    if tile < len(Grid) - Settings["GridW"] and "ground-cold_water, ground-water, ground-warm_water".__contains__(Grid[tile + Settings["GridW"]][4]):
+    if tile < len(Grid) - Settings["GridW"] and "ground-cold_water, ground-warm_water, ground-water".__contains__(Grid[tile + Settings["GridW"]][4]):
         Grid[tile + Settings["GridW"]][4] = "ground-sand"
         Grid[tile + Settings["GridW"]][5] = ""
     if structure_depth < 6:
@@ -451,16 +458,16 @@ def structure_lake(tile):
     elif Grid[tile][1] >= 0.33:
         Grid[tile][4] = "ground-warm_water"
     Grid[tile][5] = ""
-    if tile > Settings["GridW"] and not "ground-cold_water, ground-water, ground-warm_water".__contains__(Grid[tile - Settings["GridW"]][4]):
+    if tile > Settings["GridW"] and not "ground-cold_water, ground-warm_water, ground-water".__contains__(Grid[tile - Settings["GridW"]][4]):
         Grid[tile - Settings["GridW"]][4] = "ground-sand"
         Grid[tile - Settings["GridW"]][5] = ""
-    if tile > 0 and not "ground-cold_water, ground-water, ground-warm_water".__contains__(Grid[tile - 1][4]):
+    if tile > 0 and not "ground-cold_water, ground-warm_water, ground-water".__contains__(Grid[tile - 1][4]):
         Grid[tile - 1][4] = "ground-sand"
         Grid[tile - 1][5] = ""
-    if tile < len(Grid) - 1 and not "ground-cold_water, ground-water, ground-warm_water".__contains__(Grid[tile + 1][4]):
+    if tile < len(Grid) - 1 and not "ground-cold_water, ground-warm_water, ground-water".__contains__(Grid[tile + 1][4]):
         Grid[tile + 1][4] = "ground-sand"
         Grid[tile + 1][5] = ""
-    if tile < len(Grid) - Settings["GridW"] and not "ground-cold_water, ground-water, ground-warm_water".__contains__(Grid[tile + Settings["GridW"]][4]):
+    if tile < len(Grid) - Settings["GridW"] and not "ground-cold_water, ground-warm_water, ground-water".__contains__(Grid[tile + Settings["GridW"]][4]):
         Grid[tile + Settings["GridW"]][4] = "ground-sand"
         Grid[tile + Settings["GridW"]][5] = ""
     if structure_depth < 4:
@@ -667,12 +674,12 @@ def main():
     #Make islands
     for a in range(round(len(Grid) / 1600)):
         structure_tile = random.randint(0, len(Grid))
-        if "ground-water, ground-warm_water".__contains__(Grid[structure_tile][4]) and Grid[structure_tile][0] <= 0.1 and Grid[structure_tile][1] >= -0.1:
+        if "ground-warm_water, ground-water".__contains__(Grid[structure_tile][4]) and Grid[structure_tile][0] <= 0.1 and Grid[structure_tile][1] >= -0.1:
             structure_island(structure_tile)
     #Make lakes
     for a in range(round(len(Grid) / 800)):
         structure_tile = random.randint(0, len(Grid))
-        if not "ground-cold_water, ground-ice, ground-water, ground-warm_water".__contains__(Grid[structure_tile][4]):
+        if not "ground-cold_water, ground-ice, ground-warm_water, ground-water".__contains__(Grid[structure_tile][4]):
             structure_lake(structure_tile)
     #Make caves
     for a in range(round(len(Grid) / 800)):
