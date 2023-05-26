@@ -179,6 +179,7 @@ VariablesNumber = {
     "camera_y"           : 0,
     "camera_z"           : Settings["GridW"] / 18,
     "hotbar"             : 0,
+    "item_dragging"      : -1,
     "player_posx"        : 0,
     "player_posy"        : 0,
     "player_tile"        : 0,
@@ -203,11 +204,11 @@ VariablesNumber["camera_z"]
 #Grid[?][3]: Biome
 #Grid[?][4]: Ground
 #Grid[?][5]: Object
-Grid = [[0, 0, 0, "Ocean", "ground-water", ""] for a in range(Settings["GridW"] * Settings["GridH"])]
+Grid = [[0, 0, 0, "Ocean", "ground-water", ""] for i in range(Settings["GridW"] * Settings["GridH"])]
 #Images list
 ImagesList = [i for i in Images]
 #Inventory
-Inventory = [["", 0] for a in range(32)]
+Inventory = [["", 0] for i in range(32)]
 InventoryMargins =  [[(i % 8) * 89 + 8, (i // 8) * -89 + Config["ScreenY"] - 89] for i in range(32)]
 #Objects you can't walk through
 ObjectsSolid = [
@@ -379,37 +380,32 @@ class Tile(pygame.sprite.Sprite):
                 if Inventory[VariablesNumber["hotbar"]][0] == "item-snow" and Grid[self.id][4] in "ground-cold_water ground-dark_grass, ground-dirt, ground-grass, ground-warm_water, ground-water":
                     Grid[self.id][4] = "ground-snow"
                     itemremove(VariablesNumber["hotbar"])
-        #Grass spreading
-        if Grid[self.id][4] == "ground-dirt" and random.randint(0, 100) <= 0.0001:
-            if "ground-grass" in Grid[self.id - Settings["GridW"]][4] + Grid[self.id - 1][4] + Grid[self.id + 1][4] + Grid[self.id + Settings["GridW"]][4]:
-                if "ground-dark_grass" in Grid[self.id - Settings["GridW"]][4] + Grid[self.id - 1][4] + Grid[self.id + 1][4] + Grid[self.id + Settings["GridW"]][4]:
-                    if random.randrange(0, 100) <= 50:
-                        Grid[self.id][4] = "ground-grass"
-                    else:
-                        Grid[self.id][4] = "ground-dark_grass"
-                else:
-                    Grid[self.id][4] = "ground-grass"
-            else:
-                if "ground-dark_grass" in Grid[self.id - Settings["GridW"]][4] + Grid[self.id - 1][4] + Grid[self.id + 1][4] + Grid[self.id + Settings["GridW"]][4]:
-                    Grid[self.id][4] = "ground-dark_grass"
         if not Grid[self.id][4] == "":
             self.image = Images[Grid[self.id][4]]
         self.rect.center = ((self.posx - VariablesNumber["camera_x"]) * VariablesNumber["camera_z"] + Config["ScreenX"] / 2, (self.posy - VariablesNumber["camera_y"]) * VariablesNumber["camera_z"] + Config["ScreenY"] / 2)
 
 #FUNCTIONS
-def find_tile_pos(tile):
+#Find the X and Y position when given the tile #
+def find_pos_from_tile(tile):
     VariablesNumber["tile_posx"] = (((tile + 0.5) % Settings["GridW"] * Settings["TileSize"] - Settings["TileSize"] / 2) - VariablesNumber["camera_x"]) * VariablesNumber["camera_z"] + Config["ScreenX"] / 2
     VariablesNumber["tile_posy"] = ((round((tile - ((Settings["GridW"] - 1) / 2)) / Settings["GridW"]) * Settings["TileSize"]) - VariablesNumber["camera_y"]) * VariablesNumber["camera_z"] + Config["ScreenY"] / 2
+#Find the tile # when given the X and Y position
+def find_tile_from_pos(x, y):
+    pass
 #Add an item to the inventory
 def item(item):
-    for a in range(len(Inventory)):
-        if Inventory[a][0] == item and Inventory[a][1] < 32:
-            Inventory[a][1] += 1
+    item_added = False
+    for i in range(len(Inventory)):
+        if Inventory[i][0] == item and Inventory[i][1] < 32:
+            Inventory[i][1] += 1
+            item_added = True
             break
-        if Inventory[a][0] == "":
-            Inventory[a][0] = item
-            Inventory[a][1] = 1
-            break
+    if not item_added:
+        for i in range(len(Inventory)):
+            if Inventory[i][0] == "":
+                Inventory[i][0] = item
+                Inventory[i][1] = 1
+                break
 #Create an item entity
 def itementity(item, posx, posy):
     sprite = Entity(0, item, posx + random.randrange(-4, 4) * Settings["TileSize"] / 16, posy + random.randrange(-4, 4) * Settings["TileSize"] / 16, Settings["TileSize"] / 2, Settings["TileSize"] / 2)
@@ -493,12 +489,22 @@ def structure_lake(tile):
 #Draw the screen
 def draw():
     screen.fill((  0,   0,   0))
-    sprites_group_tile.draw(screen)
-    for i in range(len(Grid)):
-        find_tile_pos(i)
-        screen.blit(Images[Grid[i][4]], [VariablesNumber["tile_posx"], VariablesNumber["tile_posy"]])
-        if not Grid[i][5] == "":
-            screen.blit(Images[Grid[i][5]], [VariablesNumber["tile_posx"], VariablesNumber["tile_posy"]])
+    for i in range(int((Settings["GridW"] // VariablesNumber["camera_z"] + 2) ** 2)):
+        x = (((i + 0.5) % 19) - 9.5)
+        if VariablesNumber["player_tileposx"] < 8:
+            x += VariablesNumber["player_tileposx"] * -1 + 9
+        if VariablesNumber["player_tileposx"] > Settings["GridW"] - 8:
+            pass
+        y = (((i + 0.5) / 19) // 1 - 9) * Settings["GridW"]
+        if VariablesNumber["player_tileposy"] < 8:
+            pass
+        if VariablesNumber["player_tileposy"] > Settings["GridH"] - 8:
+            pass
+        tile = int(VariablesNumber["player_tile"] + x + y)
+        find_pos_from_tile(tile)
+        screen.blit(Images[Grid[tile][4]], [VariablesNumber["tile_posx"], VariablesNumber["tile_posy"]])
+        if not Grid[tile][5] == "":
+            screen.blit(Images[Grid[tile][5]], [VariablesNumber["tile_posx"], VariablesNumber["tile_posy"]])
     sprites_group_entity.draw(screen)
     screen.blit(screen_effect_time, (0, 0))
     #Draw the debug screen
@@ -530,8 +536,6 @@ def draw():
         pygame.draw.rect(screen_effect_inventory, (  0,   0,   0, 128), [0, Config["ScreenY"] - 97, Config["ScreenX"], 97])
     screen.blit(screen_effect_inventory, (0, 0))
     for i in range(32):
-        a = i // 8
-        b = i % 8
         if i >= 8 and not VariablesBoolean["menu_inventory"]:
             break
         if VariablesNumber["hotbar"] == i and not VariablesBoolean["menu_inventory"]:
@@ -542,8 +546,12 @@ def draw():
             font = pygame.font.SysFont("bahnschrift", 36)
             text = font.render(str(Inventory[i][1]), True, (  0,   0,   0))
             screen.blit(text, [InventoryMargins[i][0], InventoryMargins[i][1]])
+    if VariablesBoolean["menu_inventory"] and VariablesNumber["item_dragging"] >= 0:
+        screen.blit(Images[Inventory[VariablesNumber["item_dragging"]][0].replace(".png", "")], [mousex, mousey])
     pygame.display.update()
 def main():
+    global mousex
+    global mousey
     global screen
     global screen_effect_inventory
     global screen_effect_time
@@ -557,14 +565,14 @@ def main():
     pygame.display.set_caption(Config["ScreenCaption"])
     pygame.display.set_icon(Images["entity-u"])
     #Resize images
-    for a in range(len(Images)):
-        if "entity-item" in ImagesList[a]:
+    for i in range(len(Images)):
+        if "entity-item" in ImagesList[i]:
             scale = Settings["TileSize"] * VariablesNumber["camera_z"] * 0.75
-        elif "item" in ImagesList[a]:
+        elif "item" in ImagesList[i]:
             scale = 81
         else:
             scale = Settings["TileSize"] * VariablesNumber["camera_z"]
-        Images[ImagesList[a]] = pygame.transform.scale(Images[ImagesList[a]], (scale, scale))
+        Images[ImagesList[i]] = pygame.transform.scale(Images[ImagesList[i]], (scale, scale))
     #Generate world
     for a in range(len(Grid)):
         tile_posx = (a + 0.5) % Settings["GridW"] * Settings["TileSize"]
@@ -764,6 +772,29 @@ def main():
                     Keys["S"] = False
                 if event.key == pygame.K_w:
                     Keys["W"] = False
+        if pygame.mouse.get_pressed()[0] == 1:
+            if VariablesBoolean["menu_inventory"]:
+                if VariablesNumber["item_dragging"] >= 0:
+                    VariablesNumber["item_dragging"] = -1
+                else:
+                    VariablesNumber["item_dragging"] = int((mousex / (Config["ScreenX"] / 8)) // 1 + ((mousey * -1 + Config["ScreenY"]) / (Config["ScreenY"] / 8)) // 1 * 8)
+            else:
+                find_tile_from_pos(mousex, mousey)
+        #Grass spreading
+        for i in range(int((Settings["GridW"] // VariablesNumber["camera_z"] + 2) ** 2)):
+            tile = int(VariablesNumber["player_tile"] + (((i + 0.5) % 19) - 9.5) + (((i + 0.5) / 19) // 1 - 9) * Settings["GridW"])
+            if Grid[tile][4] == "ground-dirt" and random.randint(0, 100) <= 0.0001:
+                if "ground-grass" in Grid[tile - Settings["GridW"]][4] + Grid[tile - 1][4] + Grid[tile + 1][4] + Grid[tile + Settings["GridW"]][4]:
+                    if "ground-dark_grass" in Grid[tile - Settings["GridW"]][4] + Grid[tile - 1][4] + Grid[tile + 1][4] + Grid[tile + Settings["GridW"]][4]:
+                        if random.randrange(0, 100) <= 50:
+                            Grid[tile][4] = "ground-grass"
+                        else:
+                            Grid[tile][4] = "ground-dark_grass"
+                    else:
+                        Grid[tile][4] = "ground-grass"
+                else:
+                    if "ground-dark_grass" in Grid[tile - Settings["GridW"]][4] + Grid[tile - 1][4] + Grid[tile + 1][4] + Grid[tile + Settings["GridW"]][4]:
+                        Grid[tile][4] = "ground-dark_grass"
         #Set camera X and Y and change them if the player is near the edge of the world
         VariablesNumber["camera_x"] = VariablesNumber["player_posx"]
         if VariablesNumber["camera_x"] < Config["ScreenX"] / VariablesNumber["camera_z"] / 2:
