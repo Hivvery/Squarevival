@@ -178,7 +178,9 @@ VariablesNumber = {
     "camera_x"           : 0,
     "camera_y"           : 0,
     "camera_z"           : Settings["GridW"] / 18,
+    "health"             : 100,
     "hotbar"             : 0,
+    "hunger"             : 100,
     "item_dragging"      : -1,
     "player_posx"        : 0,
     "player_posy"        : 0,
@@ -494,12 +496,12 @@ def draw():
         if VariablesNumber["player_tileposx"] < 8:
             x += VariablesNumber["player_tileposx"] * -1 + 9
         if VariablesNumber["player_tileposx"] > Settings["GridW"] - 8:
-            pass
+            x += VariablesNumber["player_tileposx"] * -1 + 80.5
         y = (((i + 0.5) / 19) // 1 - 9) * Settings["GridW"]
         if VariablesNumber["player_tileposy"] < 8:
-            pass
+            y += 0
         if VariablesNumber["player_tileposy"] > Settings["GridH"] - 8:
-            pass
+            y += 0
         tile = int(VariablesNumber["player_tile"] + x + y)
         find_pos_from_tile(tile)
         screen.blit(Images[Grid[tile][4]], [VariablesNumber["tile_posx"], VariablesNumber["tile_posy"]])
@@ -548,6 +550,15 @@ def draw():
             screen.blit(text, [InventoryMargins[i][0], InventoryMargins[i][1]])
     if VariablesBoolean["menu_inventory"] and VariablesNumber["item_dragging"] >= 0:
         screen.blit(Images[Inventory[VariablesNumber["item_dragging"]][0].replace(".png", "")], [mousex, mousey])
+    #Draw the health and hunger bars
+    if not VariablesBoolean["menu_inventory"]:
+        pygame.draw.rect(screen, (255,  51,  51), [8, Config["ScreenY"] - 125, VariablesNumber["health"] * 2, 20])
+        pygame.draw.rect(screen, (128,  51,  51), [Config["ScreenX"] - VariablesNumber["hunger"] * 2 - 8, Config["ScreenY"] - 125, VariablesNumber["hunger"] * 2, 20])
+        font = pygame.font.SysFont("bahnschrift", 20)
+        text = font.render(str(VariablesNumber["health"]), True, (255, 255, 255))
+        screen.blit(text, [8, Config["ScreenY"] - 125])
+        text = font.render(str(VariablesNumber["hunger"]), True, (255, 255, 255))
+        screen.blit(text, [Config["ScreenX"] - 28, Config["ScreenY"] - 125])
     pygame.display.update()
 def main():
     global mousex
@@ -780,6 +791,20 @@ def main():
                     VariablesNumber["item_dragging"] = int((mousex / (Config["ScreenX"] / 8)) // 1 + ((mousey * -1 + Config["ScreenY"]) / (Config["ScreenY"] / 8)) // 1 * 8)
             else:
                 find_tile_from_pos(mousex, mousey)
+        #Health and hunger loss
+        if Grid[VariablesNumber["player_tile"]][5] == "object-cactus":
+            if VariablesNumber["health"] >= 0:
+                VariablesNumber["health"] -= random.randint(5, 10)
+        if VariablesNumber["health"] >= 0:
+            if VariablesNumber["hunger"] == 0 and random.randrange(0, 100) <= 1:
+                VariablesNumber["health"] -= 1
+            elif VariablesNumber["hunger"] >= 0:
+                if Keys["A"] or Keys["D"] or Keys["S"] or Keys["W"]:
+                    if random.randrange(0, 100) <= 2:
+                        VariablesNumber["hunger"] -= 1
+                else:
+                    if random.randrange(0, 100) <= 1:
+                        VariablesNumber["hunger"] -= 1
         #Grass spreading
         for i in range(int((Settings["GridW"] // VariablesNumber["camera_z"] + 2) ** 2)):
             tile = int(VariablesNumber["player_tile"] + (((i + 0.5) % 19) - 9.5) + (((i + 0.5) / 19) // 1 - 9) * Settings["GridW"])
