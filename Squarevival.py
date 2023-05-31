@@ -72,6 +72,17 @@ Images = {
     "object-stone_bricks"        : pygame.image.load("Images/squarevival-object-stone_bricks.png"        ),
     "object-torch"               : pygame.image.load("Images/squarevival-object-torch.png"               ),
 }
+#Cooldown time lengths
+Cooldowns_Length = {
+    "cooldown-cactus": 0.5,
+    "cooldown-entity": 0.1,
+    "cooldown-health": 1,
+}
+Cooldowns_Time = {
+    "cooldown-cactus": 0,
+    "cooldown-entity": 0,
+    "cooldown-health": 0,
+}
 #Pressed keys
 Keys = {
     "A": False,
@@ -792,19 +803,32 @@ def main():
             else:
                 find_tile_from_pos(mousex, mousey)
         #Health and hunger loss
-        if Grid[VariablesNumber["player_tile"]][5] == "object-cactus":
-            if VariablesNumber["health"] >= 0:
-                VariablesNumber["health"] -= random.randint(5, 10)
-        if VariablesNumber["health"] >= 0:
+        if VariablesNumber["health"] > 0:
             if VariablesNumber["hunger"] == 0 and random.randrange(0, 100) <= 1:
                 VariablesNumber["health"] -= 1
-            elif VariablesNumber["hunger"] >= 0:
-                if Keys["A"] or Keys["D"] or Keys["S"] or Keys["W"]:
-                    if random.randrange(0, 100) <= 2:
-                        VariablesNumber["hunger"] -= 1
-                else:
-                    if random.randrange(0, 100) <= 1:
-                        VariablesNumber["hunger"] -= 1
+        if VariablesNumber["hunger"] > 0:
+            if Keys["A"] or Keys["D"] or Keys["S"] or Keys["W"]:
+                if random.randrange(0, 100) <= 2:
+                    VariablesNumber["hunger"] -= 1
+            else:
+                if random.randrange(0, 100) <= 1:
+                    VariablesNumber["hunger"] -= 1
+            if Cooldowns_Time["cooldown-cactus"] <= VariablesNumber["time_seconds"] - Cooldowns_Length["cooldown-cactus"] and Grid[VariablesNumber["player_tile"]][5] == "object-cactus":
+                Cooldowns_Time["cooldown-cactus"] = VariablesNumber["time_seconds"]
+                VariablesNumber["health"] -= random.randint(5, 10)
+                if VariablesNumber["health"] < 0:
+                    VariablesNumber["health"] = 0
+        if Grid[VariablesNumber["player_tile"]][5] == "object-cactus":
+            if Cooldowns_Time["cooldown-cactus"] <= VariablesNumber["time_seconds"] - Cooldowns_Length["cooldown-cactus"]:
+                if VariablesNumber["health"] > 0:
+                    Cooldowns_Time["cooldown-cactus"] = VariablesNumber["time_seconds"]
+                    VariablesNumber["health"] -= random.randint(5, 10)
+                    if VariablesNumber["health"] < 0:
+                        VariablesNumber["health"] = 0
+        #Health gaining
+        if Cooldowns_Time["cooldown-health"] <= VariablesNumber["time_seconds"] - Cooldowns_Length["cooldown-cactus"] and VariablesNumber["health"] < 100:
+            Cooldowns_Time["cooldown-health"] = VariablesNumber["time_seconds"]
+            VariablesNumber["health"] += 1
         #Grass spreading
         for i in range(int((Settings["GridW"] // VariablesNumber["camera_z"] + 2) ** 2)):
             tile = int(VariablesNumber["player_tile"] + (((i + 0.5) % 19) - 9.5) + (((i + 0.5) / 19) // 1 - 9) * Settings["GridW"])
