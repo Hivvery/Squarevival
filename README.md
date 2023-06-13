@@ -2,31 +2,25 @@
 Squarevival is a game heavily inspired by Minecraft by Mojang Studios I've been working on.
 
 ## Keybinds
-Move up                  | W
+Move Up - W
+Move Down - S
+Move Left - A
+Move Right - D
+Destroy Tile - Left Click
+Place Item - Right Click
 
-Move down                | S
+Open/Close Inventory - E
+Select Item - 1-8
+Move Inventory Item - Left Click
 
-Move left                | A
+Open Debug Screen - Q
 
-Move right               | D
-
-Destroy tile / Drag item | Left Click
-
-Place item               | Right Click
-
-Select Item              | 1-8
-
-Open inventory           | E
-
-Open debug screen        | Q
+Click Button - Left Click
 
 ## Things I want to fix
 -Going to the bottom edge of the world crashes the game
-
 -The game crashes when you try to move an item in the inventory
-
 -The game is laggier when there are more items in the inventory
-
 -The tiles don't show near the world's edges
-
+-Tiles can be destroyed in the main menu
 -Walking diagonally into objects lets you walk through them
