@@ -4,7 +4,6 @@ Squarevival is a game heavily inspired by Minecraft by Mojang Studios I've been 
 ## Keybinds
 Move Up - W
 
-
 Move Down - S
 
 Move Left - A
@@ -15,19 +14,13 @@ Destroy Tile - Left Click
 
 Place Item - Right Click
 
-
-
 Open/Close Inventory - E
 
 Select Item - 1-8
 
 Move Inventory Item - Left Click
 
-
-
 Open Debug Screen - Q
-
-
 
 Click Button - Left Click
 
