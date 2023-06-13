@@ -12,6 +12,7 @@ Config = {
 }
 #Images
 Images = {
+    #Entity images
     "entity-fake_stone"             : pygame.image.load("Images/squarevival-entity-fake_stone.png"             ),
     "enitty-fish-red"               : pygame.image.load("Images/squarevival-entity-fish-red.png"               ),
     "entity-fish-teal"              : pygame.image.load("Images/squarevival-entity-fish-teal.png"              ),
@@ -34,6 +35,7 @@ Images = {
     "entity-u"                      : pygame.image.load("Images/squarevival-entity-u.png"                      ),
     "entity-villager"               : pygame.image.load("Images/squarevival-entity-villager.png"               ),
     "entity-wolf"                   : pygame.image.load("Images/squarevival-entity-wolf.png"                   ),
+    #Ground images
     "ground-bright_wood_floor"      : pygame.image.load("Images/squarevival-ground-bright_wood_floor.png"      ),
     "ground-cold_water"             : pygame.image.load("Images/squarevival-ground-cold_water.png"             ),
     "ground-dark_grass"             : pygame.image.load("Images/squarevival-ground-dark_grass.png"             ),
@@ -50,6 +52,7 @@ Images = {
     "ground-stone_ground"           : pygame.image.load("Images/squarevival-ground-stone_ground.png"           ),
     "ground-warm_water"             : pygame.image.load("Images/squarevival-ground-warm_water.png"             ),
     "ground-water"                  : pygame.image.load("Images/squarevival-ground-water.png"                  ),
+    #Item images
     "item-apple"                    : pygame.image.load("Images/squarevival-item-apple.png"                    ),
     "item-bright_wood"              : pygame.image.load("Images/squarevival-item-bright_wood.png"              ),
     "item-cactus_spike"             : pygame.image.load("Images/squarevival-item-cactus_spike.png"             ),
@@ -64,6 +67,7 @@ Images = {
     "item-mud"                      : pygame.image.load("Images/squarevival-item-mud.png"                      ),
     "item-sand"                     : pygame.image.load("Images/squarevival-item-sand.png"                     ),
     "item-snow"                     : pygame.image.load("Images/squarevival-item-snow.png"                     ),
+    #Object images
     "object-apple_tree"             : pygame.image.load("Images/squarevival-object-apple_tree.png"             ),
     "object-bright_tree"            : pygame.image.load("Images/squarevival-object-bright_tree.png"            ),
     "object-bright_wood"            : pygame.image.load("Images/squarevival-object-bright_wood.png"            ),
@@ -105,46 +109,83 @@ Keys = {
 }
 #Text to be shown in-game
 Names = {
-    ""                        : ""              ,
-    "entity-item-apple"       : "Apple"         ,
-    "entity-item-bright_wood" : "Bright Wood"   ,
-    "entity-item-cactus_spike": "Cactus Spike"  ,
-    "entity-item-coal"        : "Coal"          ,
-    "entity-item-dark_wood"   : "Dark Wood"     ,
-    "entity-item-diamond"     : "Diamond"       ,
-    "entity-item-iron_bar"    : "Iron Bar"      ,
-    "entity-item-leaf"        : "Leaf"          ,
-    "entity-u"                : "U"             ,
-    "ground-cold_water"       : "Cold Water"    ,
-    "ground-dark_grass"       : "Dark Grass"    ,
-    "ground-dirt"             : "Dirt"          ,
-    "ground-grass"            : "Grass"         ,
-    "ground-ice"              : "Ice"           ,
-    "ground-lava"             : "Lava"          ,
-    "ground-mud"              : "Mud"           ,
-    "ground-sand"             : "Sand"          ,
-    "ground-snow"             : "Snow"          ,
-    "ground-stone_ground"     : "Stone Ground"  ,
-    "ground-warm_water"       : "Warm Water"    ,
-    "ground-water"            : "Water"         ,
-    "item-apple"              : "Apple"         ,
-    "item-bright_wood"        : "Bright Wood"   ,
-    "iten-cactus_spike"       : "Cactus Spike"  ,
-    "item-dark_wood"          : "Dark Wood"     ,
-    "item-leaf"               : "Leaf"          ,
-    "object-apple_tree"       : "Apple Tree"    ,
-    "object-box"              : "Box"           ,
-    "object-bright_tree"      : "Bright Tree"   ,
-    "object-bright_wood"      : "Bright Wood"   ,
-    "object-cactus"           : "Cactus"        ,
-    "object-cave"             : "Cave"          ,
-    "object-christmas_tree"   : "Christmas Tree",
-    "object-coal_ore"         : "Coal Ore"      ,
-    "object-dark_tree"        : "Dark Tree"     ,
-    "object-dark_wood"        : "Dark Wood"     ,
-    "object-iron_ore"         : "Iron Ore"      ,
-    "object-stone"            : "Stone"         ,
-    "object-torch"            : "Torch"         ,
+    ""                              : ""                   ,
+    #Entity names
+    "entity-fake_stone"             : "Fake Stone"         ,
+    "enitty-fish-red"               : "Fish"               ,
+    "entity-fish-teal"              : "Fish"               ,
+    "entity-item-apple"             : "Apple"              ,
+    "entity-item-bright_wood"       : "Bright Wood"        ,
+    "entity-item-cactus_spike"      : "Cactus Spike"       ,
+    "entity-item-coal"              : "Coal"               ,
+    "entity-item-dark_grass_seed"   : "Dark Grass Seed"    ,
+    "entity-item-dark_wood"         : "Dark Wood"          ,
+    "entity-item-diamond"           : "Diamond"            ,
+    "entity-item-grass_seed"        : "Grass Seed"         ,
+    "entity-item-ice"               : "Ice"                ,
+    "entity-item-iron_bar"          : "Iron Bar"           ,
+    "entity-item-leaf"              : "Leaf"               ,
+    "entity-item-mud"               : "Mud"                ,
+    "entity-item-sand"              : "Sand"               ,
+    "entity-item-snow"              : "Snow"               ,
+    "entity-sheep"                  : "Sheep"              ,
+    "entity-spider"                 : "Spider"             ,
+    "entity-u"                      : "U"                  ,
+    "entity-villager"               : "Villager"           ,
+    "entity-wolf"                   : "Wolf"               ,
+    #Ground names
+    "ground-bright_wood_floor"      : "Bright Wood Floor"  ,
+    "ground-cold_water"             : "Cold Water"         ,
+    "ground-dark_grass"             : "Dark Grass"         ,
+    "ground-dark_wood_floor"        : "Dark Wood Floor"    ,
+    "ground-dirt"                   : "Dirt"               ,
+    "ground-grass"                  : "Grass"              ,
+    "ground-ice"                    : "Ice"                ,
+    "ground-lava"                   : "Lava"               ,
+    "ground-mud"                    : "Mud"                ,
+    "ground-sand"                   : "Sand"               ,
+    "ground-sand_bricks_ground"     : "Sand Bricks Ground" ,
+    "ground-snow"                   : "Snow"               ,
+    "ground-stone_bricks_ground"    : "Stone Bricks Ground",
+    "ground-stone_ground"           : "Stone Ground"       ,
+    "ground-warm_water"             : "Warm Water"         ,
+    "ground-water"                  : "Water"              ,
+    #Item names
+    "item-apple"                    : "Apple"              ,
+    "item-bright_wood"              : "Bright Wood"        ,
+    "item-cactus_spike"             : "Cactus Spike"       ,
+    "item-coal"                     : "Coal"               ,
+    "item-dark_grass_seed"          : "Dark Grass Seed"    ,
+    "item-dark_wood"                : "Dark Wood"          ,
+    "item-diamond"                  : "Diamond"            ,
+    "item-grass_seed"               : "Grass Seed"         ,
+    "item-ice"                      : "Ice"                ,
+    "item-iron_bar"                 : "Iron Bar"           ,
+    "item-leaf"                     : "Leaf"               ,
+    "item-mud"                      : "Mud"                , 
+    "item-sand"                     : "Sand"               ,
+    "item-snow"                     : "Snow"               ,
+    #Object names
+    "object-apple_tree"             : "Apple Tree"         ,
+    "object-bright_tree"            : "Bright Tree"        ,
+    "object-bright_wood"            : "Bright Wood"        ,
+    "object-bright_wood_box"        : "Bright Wood Box"    ,
+    "object-bright_wood_door-closed": "Bright Wood Door"   ,
+    "object-bright_wood_door-open"  : "Bright wood Door"   ,
+    "object-cactus"                 : "Cactus"             ,
+    "object-cave"                   : "Cave"               ,
+    "object-christmas_tree"         : "Christmas Tree"     ,
+    "object-coal_ore"               : "Coal Ore"           ,
+    "object-dark_tree"              : "Dark Tree"          ,
+    "object-dark_wood"              : "Dark Wood"          ,
+    "object-dark_wood_box"          : "Dark Wood Box"      ,
+    "object-dark_wood_door-closed"  : "Dark Wood Door"     ,
+    "object-dark_wood_door-open"    : "Dark Wood Door"     ,
+    "object-diamond_ore"            : "Diamond Ore"        ,
+    "object-iron_ore"               : "Iron Ore"           ,
+    "object-sand_bricks"            : "Sand Bricks"        ,
+    "object-stone"                  : "Stone"              ,
+    "object-stone_bricks"           : "Stone Bricks"       ,
 }
 #World settings
 Settings = {
@@ -157,8 +198,11 @@ Settings["TileSize"] = Config["ScreenY"] / Settings["GridH"]
 #Walk speeds
 Speeds = {
     ""                          : 1,
+    #Ground speeds
+    "ground-bright_wood_floor"  : 1,
     "ground-cold_water"         : 0.4,
     "ground-dark_grass"         : 1,
+    "ground-dark_wood_floor"    : 1,
     "ground-dirt"               : 1,
     "ground-grass"              : 1,
     "ground-ice"                : 2,
@@ -171,56 +215,75 @@ Speeds = {
     "ground-stone_ground"       : 1,
     "ground-warm_water"         : 0.6,
     "ground-water"              : 0.5,
+    #Object speeds
     "object-apple_tree"         : 1,
-    "object-box"                : 1,
     "object-bright_tree"        : 1,
     "object-bright_wood"        : 1,
+    "object-bright_wood_box"    : 1,
+    "object-bright_wood_door"   : 1,
     "object-cactus"             : 0.5,
     "object-cave"               : 1,
     "object-christmas_tree"     : 1,
     "object-coal_ore"           : 1,
     "object-dark_tree"          : 1,
     "object-dark_wood"          : 1,
+    "object-dark_wood_box"      : 1,
+    "object-dark_wood_door"     : 1,
     "object-diamond_ore"        : 1,
     "object-iron_ore"           : 1,
     "object-sand_bricks"        : 1,
     "object-stone"              : 1,
     "object-stone_bricks"       : 1,
-    "object-torch"              : 1,
-}
-#Boolean variables
-VariablesBoolean = {
-    "key_a"         : False,
-    "key_d"         : False,
-    "key_s"         : False,
-    "key_w"         : False,
-    "menu_debug"    : False,
-    "menu_inventory": False,
 }
 #Number variables
-VariablesNumber = {
+Variables = {
+    #Camera's horizontal and vertical position
     "camera_x"           : 0,
     "camera_y"           : 0,
+    #How zoomed in the camera is
     "camera_z"           : Settings["GridW"] / 18,
+    #Whether the player is in a world or not
+    "game"               : False,
+    #Player's health points
     "health"             : 100,
+    #Hotbar item selected
     "hotbar"             : 0,
+    #Player's hunger points
     "hunger"             : 100,
-    "item_dragging"      : -1,
+    #Keys being pressed
+    "key_a"              : False,
+    "key_d"              : False,
+    "key_s"              : False,
+    "key_w"              : False,
+    #Menus being shown
+    "menu_debug"         : False,
+    "menu_inventory"     : False,
+    "menu_pause"         : False,
+    "menu_settings"      : False,
+    #Page numbers (0: Main menu, 1: World list, 2: World creation, 3: Credits, 4: Game)
+    "page"               : 0,
+    #Player horizontal and vertical position
     "player_posx"        : 0,
     "player_posy"        : 0,
+    #Tile the player is standing on
     "player_tile"        : 0,
     "player_tileposx"    : 0,
     "player_tileposy"    : 0,
+    #Player's moving speed
     "player_vel"         : 0,
+    #Variable used for keeping track of the size of a structure
     "structure_depth"    : 0,
+    #Tile's horizontal and vertical position
     "tile_posx"          : 0,
     "tile_posy"          : 0,
+    #Length of a full day/night cycle (5 minutes)
     "time_day_length"    : 300,
+    #Percentage through the full day/night cycle
     "time_day_percentage": 0,
+    #Time since the code started running in frames and seconds
     "time_frames"        : 0,
     "time_seconds"       : 0,
 }
-VariablesNumber["camera_z"]
 
 #LISTS
 #Tile list
@@ -235,7 +298,11 @@ Grid = [[0, 0, 0, "Ocean", "ground-water", ""] for i in range(Settings["GridW"] 
 ImagesList = [i for i in Images]
 #Inventory
 Inventory = [["", 0] for i in range(32)]
+#Inventory margins
 InventoryMargins =  [[(i % 8) * 89 + 8, (i // 8) * -89 + Config["ScreenY"] - 89] for i in range(32)]
+#Item being dragged in the inventory
+Item_Dragging = ["", 0]
+Item_Swap = ["", 0]
 #Objects you can't walk through
 ObjectsSolid = [
     "object-apple_tree"             ,
@@ -256,7 +323,7 @@ ObjectsSolid = [
 Points = [[a, 1, random.randrange(0, Config["ScreenX"]), random.randrange(0, Config["ScreenY"])] for a in range(3) for b in range(int(Settings["Points"] / 2))] + [[a, -1, random.randrange(0, Config["ScreenX"]), random.randrange(0, Config["ScreenY"])] for a in range(3) for b in range(int(Settings["Points"] / 2))]
 
 #VARIABLES
-structure_depth, sprites_group_entity, sprites_group_tile = 0, pygame.sprite.Group(), pygame.sprite.Group()
+structure_depth, sprites_group_entity, sprites_group_tile, sprites_group_ui = 0, pygame.sprite.Group(), pygame.sprite.Group(), pygame.sprite.Group()
 
 #CLASSES
 #Entities (The player, items etc.)
@@ -272,50 +339,50 @@ class Entity(pygame.sprite.Sprite):
         self.type = type
         self.image = Images[self.type]
         self.rect = self.image.get_rect()
-        self.rect.center = ((self.posx - VariablesNumber["camera_x"]) * VariablesNumber["camera_z"] + Config["ScreenX"] / 2, (self.posy - VariablesNumber["camera_y"]) * VariablesNumber["camera_z"] + Config["ScreenY"] / 2)
+        self.rect.center = ((self.posx - Variables["camera_x"]) * Variables["camera_z"] + Config["ScreenX"] / 2, (self.posy - Variables["camera_y"]) * Variables["camera_z"] + Config["ScreenY"] / 2)
     def update(self):
         if self.type.__contains__("entity-item"):
             #Collect items
-            if math.sqrt((self.posx - VariablesNumber["player_posx"]) ** 2 + (self.posy - VariablesNumber["player_posy"]) ** 2) <= Settings["TileSize"]:
+            if math.sqrt((self.posx - Variables["player_posx"]) ** 2 + (self.posy - Variables["player_posy"]) ** 2) <= Settings["TileSize"]:
                 item(self.type.replace("entity-", ""))
                 self.kill()
         elif self.type == "entity-u":
             #Set player speed
-            VariablesNumber["player_vel"] = (Settings["TileSize"] / 8) * Speeds[Grid[VariablesNumber["player_tile"]][4]] * Speeds[Grid[VariablesNumber["player_tile"]][5]]
+            Variables["player_vel"] = (Settings["TileSize"] / 8) * Speeds[Grid[Variables["player_tile"]][4]] * Speeds[Grid[Variables["player_tile"]][5]]
             #Move player if the inventory is closed and in the opposite direction if the player walks into an object
-            if not VariablesBoolean["menu_inventory"]:
+            if not Variables["menu_inventory"]:
                 if Keys["A"]:
-                    self.posx -= VariablesNumber["player_vel"]
-                    if VariablesNumber["player_tileposx"] % 1 > 0.5 and ObjectsSolid.__contains__(Grid[VariablesNumber["player_tile"] - 1][5]):
-                        self.posx += VariablesNumber["player_vel"]
+                    self.posx -= Variables["player_vel"]
+                    if Variables["player_tileposx"] % 1 > 0.5 and ObjectsSolid.__contains__(Grid[Variables["player_tile"] - 1][5]):
+                        self.posx += Variables["player_vel"]
                 if Keys["D"]:
-                    self.posx += VariablesNumber["player_vel"]
-                    if VariablesNumber["player_tileposx"] % 1 < 0.5 and ObjectsSolid.__contains__(Grid[VariablesNumber["player_tile"] + 1][5]):
-                        self.posx -= VariablesNumber["player_vel"]
+                    self.posx += Variables["player_vel"]
+                    if Variables["player_tileposx"] % 1 < 0.5 and ObjectsSolid.__contains__(Grid[Variables["player_tile"] + 1][5]):
+                        self.posx -= Variables["player_vel"]
                 if Keys["S"]:
-                    self.posy += VariablesNumber["player_vel"]
-                    if VariablesNumber["player_tileposy"] % 1 < 0.5 and ObjectsSolid.__contains__(Grid[VariablesNumber["player_tile"] + Settings["GridW"]][5]):
-                        self.posy -= VariablesNumber["player_vel"]
+                    self.posy += Variables["player_vel"]
+                    if Variables["player_tileposy"] % 1 < 0.5 and ObjectsSolid.__contains__(Grid[Variables["player_tile"] + Settings["GridW"]][5]):
+                        self.posy -= Variables["player_vel"]
                 if Keys["W"]:
-                    self.posy -= VariablesNumber["player_vel"]
-                    if VariablesNumber["player_tileposy"] % 1 > 0.5 and ObjectsSolid.__contains__(Grid[VariablesNumber["player_tile"] - Settings["GridW"]][5]):
-                        self.posy += VariablesNumber["player_vel"]
-            VariablesNumber["player_tileposx"] = self.posx * (Settings["GridW"] / Config["ScreenX"]) - 0.5
-            VariablesNumber["player_tileposy"] = self.posy * (Settings["GridH"] / Config["ScreenY"]) - 0.5
+                    self.posy -= Variables["player_vel"]
+                    if Variables["player_tileposy"] % 1 > 0.5 and ObjectsSolid.__contains__(Grid[Variables["player_tile"] - Settings["GridW"]][5]):
+                        self.posy += Variables["player_vel"]
+            Variables["player_tileposx"] = self.posx * (Settings["GridW"] / Config["ScreenX"]) - 0.5
+            Variables["player_tileposy"] = self.posy * (Settings["GridH"] / Config["ScreenY"]) - 0.5
             #Keep player away from the edge of the world
-            if VariablesNumber["player_tileposx"] <= 0:
+            if Variables["player_tileposx"] <= 0:
                 self.posx = 4
-            elif VariablesNumber["player_tileposx"] >= Settings["GridW"] - 1:
+            elif Variables["player_tileposx"] >= Settings["GridW"] - 1:
                 self.posx = Config["ScreenX"] - 4
-            if VariablesNumber["player_tileposy"] <= 0:
+            if Variables["player_tileposy"] <= 0:
                 self.posy = 4
-            elif VariablesNumber["player_tileposy"] >= Settings["GridH"] - 1:
+            elif Variables["player_tileposy"] >= Settings["GridH"] - 1:
                 self.posy = Config["ScreenY"] - 4
-            VariablesNumber["player_posx"] = self.posx
-            VariablesNumber["player_posy"] = self.posy
+            Variables["player_posx"] = self.posx
+            Variables["player_posy"] = self.posy
             self.tile = round(self.posx / Settings["TileSize"] - 0.5) + round(self.posy / Settings["TileSize"] - 0.5) * Settings["GridH"]
-            VariablesNumber["player_tile"] = self.tile
-        self.rect.center = ((self.posx - VariablesNumber["camera_x"]) * VariablesNumber["camera_z"] + Config["ScreenX"] / 2, (self.posy - VariablesNumber["camera_y"]) * VariablesNumber["camera_z"] + Config["ScreenY"] / 2)
+            Variables["player_tile"] = self.tile
+        self.rect.center = ((self.posx - Variables["camera_x"]) * Variables["camera_z"] + Config["ScreenX"] / 2, (self.posy - Variables["camera_y"]) * Variables["camera_z"] + Config["ScreenY"] / 2)
 #Tiles
 class Tile(pygame.sprite.Sprite):
     def __init__(self, identity, posx, posy, sizx, sizy):
@@ -327,11 +394,11 @@ class Tile(pygame.sprite.Sprite):
         self.id = identity
         self.image = Images[Grid[self.id][4]]
         self.rect = self.image.get_rect()
-        self.rect.center = ((self.posx - VariablesNumber["camera_x"]) * VariablesNumber["camera_z"] + Config["ScreenX"] / 2, (self.posy - VariablesNumber["camera_y"]) * VariablesNumber["camera_z"] + Config["ScreenY"] / 2)
+        self.rect.center = ((self.posx - Variables["camera_x"]) * Variables["camera_z"] + Config["ScreenX"] / 2, (self.posy - Variables["camera_y"]) * Variables["camera_z"] + Config["ScreenY"] / 2)
     def update(self):
         if self.rect.collidepoint(pygame.mouse.get_pos()):
             #Destroying objects/tiles
-            if pygame.mouse.get_pressed()[0] == 1:
+            if pygame.mouse.get_pressed()[0] == 1 and not Variables["menu_inventory"]:
                 if not Grid[self.id][4] in "ground-cold_water, ground-dirt, ground-stone_ground, ground-warm_water, ground-water":
                     if Grid[self.id][4] == "ground-dark_grass":
                         if random.randrange(0, 100) <= 10:
@@ -380,40 +447,63 @@ class Tile(pygame.sprite.Sprite):
                             itementity("entity-item-iron_bar", self.posx, self.posy)
                     Grid[self.id][5] = ""
             #Placing items
-            if pygame.mouse.get_pressed()[2] == 1 and Grid[self.id][5] == "":
-                if Inventory[VariablesNumber["hotbar"]][0] == "item-bright_wood":
+            if pygame.mouse.get_pressed()[2] == 1 and Grid[self.id][5] == "" and not Variables["menu_inventory"]:
+                if Inventory[Variables["hotbar"]][0] == "item-bright_wood":
                     Grid[self.id][5] = "object-bright_wood"
-                    itemremove(VariablesNumber["hotbar"])
-                if Inventory[VariablesNumber["hotbar"]][0] == "item-dark_grass_seed" and Grid[self.id][4] == "ground-dirt":
+                    itemremove(Variables["hotbar"])
+                if Inventory[Variables["hotbar"]][0] == "item-dark_grass_seed" and Grid[self.id][4] == "ground-dirt":
                     Grid[self.id][4] = "ground-dark_grass"
-                    itemremove(VariablesNumber["hotbar"])
-                if Inventory[VariablesNumber["hotbar"]][0] == "item-dark_wood":
+                    itemremove(Variables["hotbar"])
+                if Inventory[Variables["hotbar"]][0] == "item-dark_wood":
                     Grid[self.id][5] = "object-dark_wood"
-                    itemremove(VariablesNumber["hotbar"])
-                if Inventory[VariablesNumber["hotbar"]][0] == "item-grass_seed" and Grid[self.id][4] == "ground-dirt":
+                    itemremove(Variables["hotbar"])
+                if Inventory[Variables["hotbar"]][0] == "item-grass_seed" and Grid[self.id][4] == "ground-dirt":
                     Grid[self.id][4] = "ground-grass"
-                    itemremove(VariablesNumber["hotbar"])
-                if Inventory[VariablesNumber["hotbar"]][0] == "item-ice" and Grid[self.id][4] in "ground-cold_water ground-dark_grass, ground-dirt, ground-grass, ground-warm_water, ground-water":
+                    itemremove(Variables["hotbar"])
+                if Inventory[Variables["hotbar"]][0] == "item-ice" and Grid[self.id][4] in "ground-cold_water ground-dark_grass, ground-dirt, ground-grass, ground-warm_water, ground-water":
                     Grid[self.id][4] = "ground-ice"
-                    itemremove(VariablesNumber["hotbar"])
-                if Inventory[VariablesNumber["hotbar"]][0] == "item-mud" and Grid[self.id][4] in "ground-cold_water ground-dark_grass, ground-dirt, ground-grass, ground-warm_water, ground-water":
+                    itemremove(Variables["hotbar"])
+                if Inventory[Variables["hotbar"]][0] == "item-mud" and Grid[self.id][4] in "ground-cold_water ground-dark_grass, ground-dirt, ground-grass, ground-warm_water, ground-water":
                     Grid[self.id][4] = "ground-mud"
-                    itemremove(VariablesNumber["hotbar"])
-                if Inventory[VariablesNumber["hotbar"]][0] == "item-sand" and Grid[self.id][4] in "ground-cold_water ground-dark_grass, ground-dirt, ground-grass, ground-warm_water, ground-water":
+                    itemremove(Variables["hotbar"])
+                if Inventory[Variables["hotbar"]][0] == "item-sand" and Grid[self.id][4] in "ground-cold_water ground-dark_grass, ground-dirt, ground-grass, ground-warm_water, ground-water":
                     Grid[self.id][4] = "ground-sand"
-                    itemremove(VariablesNumber["hotbar"])
-                if Inventory[VariablesNumber["hotbar"]][0] == "item-snow" and Grid[self.id][4] in "ground-cold_water ground-dark_grass, ground-dirt, ground-grass, ground-warm_water, ground-water":
+                    itemremove(Variables["hotbar"])
+                if Inventory[Variables["hotbar"]][0] == "item-snow" and Grid[self.id][4] in "ground-cold_water ground-dark_grass, ground-dirt, ground-grass, ground-warm_water, ground-water":
                     Grid[self.id][4] = "ground-snow"
-                    itemremove(VariablesNumber["hotbar"])
+                    itemremove(Variables["hotbar"])
         if not Grid[self.id][4] == "":
             self.image = Images[Grid[self.id][4]]
-        self.rect.center = ((self.posx - VariablesNumber["camera_x"]) * VariablesNumber["camera_z"] + Config["ScreenX"] / 2, (self.posy - VariablesNumber["camera_y"]) * VariablesNumber["camera_z"] + Config["ScreenY"] / 2)
+        self.rect.center = ((self.posx - Variables["camera_x"]) * Variables["camera_z"] + Config["ScreenX"] / 2, (self.posy - Variables["camera_y"]) * Variables["camera_z"] + Config["ScreenY"] / 2)
+class UI_Button(pygame.sprite.Sprite):
+    def __init__(self, identity, pos_x, pos_y, size_x, size_y, color, text_color, text_font, text_size, text):
+        pygame.sprite.Sprite.__init__(self)
+        self.identity = identity
+        self.pos_x = pos_x
+        self.pos_y = pos_y
+        self.size_x = size_x
+        self.size_y = size_y
+        self.text_style = pygame.font.SysFont(text_font, text_size)
+        self.text = self.text_style.render(text, 1, text_color)
+        self.image = pygame.Surface((self.size_x, self.size_y))
+        self.image.fill(color)
+        self.image.blit(self.text, self.text.get_rect(center=(self.size_x / 2, self.size_y / 2)))
+        self.rect = self.image.get_rect()
+        self.rect.center = (self.pos_x, self.pos_y)
+    def update(self):
+        if self.rect.collidepoint(pygame.mouse.get_pos()):
+            if pygame.mouse.get_pressed()[0] == 1:
+                if self.identity == 0:
+                    Variables["page"] = 4
+        self.rect.center = (self.pos_x, self.pos_y)
 
 #FUNCTIONS
+def find_item_from_pos(x, y):
+    return int((x / (Config["ScreenX"] / 8)) // 1 + ((y * -1 + Config["ScreenY"]) / (Config["ScreenY"] / 8)) // 1 * 8)
 #Find the X and Y position when given the tile #
 def find_pos_from_tile(tile):
-    VariablesNumber["tile_posx"] = (((tile + 0.5) % Settings["GridW"] * Settings["TileSize"] - Settings["TileSize"] / 2) - VariablesNumber["camera_x"]) * VariablesNumber["camera_z"] + Config["ScreenX"] / 2
-    VariablesNumber["tile_posy"] = ((round((tile - ((Settings["GridW"] - 1) / 2)) / Settings["GridW"]) * Settings["TileSize"]) - VariablesNumber["camera_y"]) * VariablesNumber["camera_z"] + Config["ScreenY"] / 2
+    Variables["tile_posx"] = (((tile + 0.5) % Settings["GridW"] * Settings["TileSize"] - Settings["TileSize"] / 2) - Variables["camera_x"]) * Variables["camera_z"] + Config["ScreenX"] / 2
+    Variables["tile_posy"] = ((round((tile - ((Settings["GridW"] - 1) / 2)) / Settings["GridW"]) * Settings["TileSize"]) - Variables["camera_y"]) * Variables["camera_z"] + Config["ScreenY"] / 2
 #Find the tile # when given the X and Y position
 def find_tile_from_pos(x, y):
     pass
@@ -513,77 +603,96 @@ def structure_lake(tile):
     structure_depth -= 1
 #Draw the screen
 def draw():
-    screen.fill((  0,   0,   0))
-    for i in range(int((Settings["GridW"] // VariablesNumber["camera_z"] + 2) ** 2)):
-        x = (((i + 0.5) % 19) - 9.5)
-        if VariablesNumber["player_tileposx"] < 8:
-            x += VariablesNumber["player_tileposx"] * -1 + 9
-        if VariablesNumber["player_tileposx"] > Settings["GridW"] - 8:
-            x += VariablesNumber["player_tileposx"] * -1 + 80.5
-        y = (((i + 0.5) / 19) // 1 - 9) * Settings["GridW"]
-        if VariablesNumber["player_tileposy"] < 8:
-            y += 0
-        if VariablesNumber["player_tileposy"] > Settings["GridH"] - 8:
-            y += 0
-        tile = int(VariablesNumber["player_tile"] + x + y)
-        find_pos_from_tile(tile)
-        screen.blit(Images[Grid[tile][4]], [VariablesNumber["tile_posx"], VariablesNumber["tile_posy"]])
-        if not Grid[tile][5] == "":
-            screen.blit(Images[Grid[tile][5]], [VariablesNumber["tile_posx"], VariablesNumber["tile_posy"]])
-    sprites_group_entity.draw(screen)
-    screen.blit(screen_effect_time, (0, 0))
-    #Draw the debug screen
-    if VariablesBoolean["menu_debug"] and not VariablesBoolean["menu_inventory"]:
-        pygame.draw.rect(screen, (  0,   0,   0), [5, 5, Config["ScreenX"] - 10, 210])
-        font = pygame.font.SysFont("bahnschrift", 20)
-        text = font.render(Config["ScreenCaption"], True, (255, 255, 255))
-        screen.blit(text, [10, 10])
-        text = font.render("Position (X, Y): " + str(round(VariablesNumber["player_posx"] * (Settings["GridW"] / Config["ScreenX"]) - 0.5, 1)) + ", " + str(round(VariablesNumber["player_posy"] * (Settings["GridH"] / Config["ScreenY"]) - 0.5, 1)), True, (255, 255, 255))
-        screen.blit(text, [10, 40])
-        text = font.render("Tile (#, X, Y): " + str(VariablesNumber["player_tile"]) + ", " + str(round(VariablesNumber["player_posx"] / Settings["TileSize"] - 0.5)) + ", " + str(round(VariablesNumber["player_posy"] / Settings["TileSize"] - 0.5)), True, (255, 255, 255))
-        screen.blit(text, [10, 70])
-        text = font.render("Tile Features (Biome, Ground, Object):", True, (255, 255, 255))
-        screen.blit(text, [10, 100])
-        if Grid[VariablesNumber["player_tile"]][5] == "":
-            text = font.render(str(Grid[VariablesNumber["player_tile"]][3]) + ", " + str(Names[Grid[VariablesNumber["player_tile"]][4]]), True, (255, 255, 255))
+    if Variables["page"] == 0:
+        screen.fill((  0, 255, 102))
+        sprites_group_ui.draw(screen)
+        font = pygame.font.SysFont("bahnschrift", 100)
+        text = font.render("Squarevival", True, (  0,   0,   0))
+        text_rect = text.get_rect(center=(Config["ScreenX"] / 2, 75))
+        screen.blit(text, text_rect)
+    elif Variables["page"] == 1:
+        pass
+    elif Variables["page"] == 2:
+        pass
+    elif Variables["page"] == 3:
+        pass
+    elif Variables["page"] == 4:
+        screen.fill((  0,   0,   0))
+        for i in range(int((Settings["GridW"] // Variables["camera_z"] + 2) ** 2)):
+            x = (((i + 0.5) % 19) - 9.5)
+            if Variables["player_tileposx"] < 8:
+                x += Variables["player_tileposx"] * -1 + 9
+            if Variables["player_tileposx"] > Settings["GridW"] - 8:
+                x += Variables["player_tileposx"] * -1 + 80.5
+            y = (((i + 0.5) / 19) // 1 - 9) * Settings["GridW"]
+            if Variables["player_tileposy"] < 8:
+                y += 0
+            if Variables["player_tileposy"] > Settings["GridH"] - 8:
+                y += 0
+            tile = int(Variables["player_tile"] + x + y)
+            find_pos_from_tile(tile)
+            screen.blit(Images[Grid[tile][4]], [Variables["tile_posx"], Variables["tile_posy"]])
+            if not Grid[tile][5] == "":
+                screen.blit(Images[Grid[tile][5]], [Variables["tile_posx"], Variables["tile_posy"]])
+        sprites_group_entity.draw(screen)
+        screen.blit(screen_effect_time, (0, 0))
+        #Draw the debug screen
+        if Variables["menu_debug"] and not Variables["menu_inventory"]:
+            pygame.draw.rect(screen, (  0,   0,   0), [5, 5, Config["ScreenX"] - 10, 210])
+            font = pygame.font.SysFont("bahnschrift", 20)
+            text = font.render(Config["ScreenCaption"], True, (255, 255, 255))
+            screen.blit(text, [10, 10])
+            text = font.render("Position (X, Y): " + str(round(Variables["player_posx"] * (Settings["GridW"] / Config["ScreenX"]) - 0.5, 1)) + ", " + str(round(Variables["player_posy"] * (Settings["GridH"] / Config["ScreenY"]) - 0.5, 1)), True, (255, 255, 255))
+            screen.blit(text, [10, 40])
+            text = font.render("Tile (#, X, Y): " + str(Variables["player_tile"]) + ", " + str(round(Variables["player_posx"] / Settings["TileSize"] - 0.5)) + ", " + str(round(Variables["player_posy"] / Settings["TileSize"] - 0.5)), True, (255, 255, 255))
+            screen.blit(text, [10, 70])
+            text = font.render("Tile Features (Biome, Ground, Object):", True, (255, 255, 255))
+            screen.blit(text, [10, 100])
+            if Grid[Variables["player_tile"]][5] == "":
+                text = font.render(str(Grid[Variables["player_tile"]][3]) + ", " + str(Names[Grid[Variables["player_tile"]][4]]), True, (255, 255, 255))
+            else:
+                text = font.render(str(Grid[Variables["player_tile"]][3]) + ", " + str(Names[Grid[Variables["player_tile"]][4]]) + ", " + str(Names[Grid[Variables["player_tile"]][5]]), True, (255, 255, 255))
+            screen.blit(text, [10, 130])
+            text = font.render("Biome Info (Water, Temperature, Humidity): " + str(round(Grid[Variables["player_tile"]][0], 3)) + ", " + str(round(Grid[Variables["player_tile"]][1], 3)) + ", " + str(round(Grid[Variables["player_tile"]][2], 3)), True, (255, 255, 255))
+            screen.blit(text, [10, 160])
+            text = font.render("Time (%, #): " + str(round(Variables["time_day_percentage"], 1)) + ", " + str(Variables["time_seconds"] // Variables["time_day_length"]), True, (255, 255, 255))
+            screen.blit(text, [10, 190])
+        #Draw the hotbar/inventory
+        if Variables["menu_inventory"]:
+            screen_effect_inventory.fill((  0,   0,   0, 128))
         else:
-            text = font.render(str(Grid[VariablesNumber["player_tile"]][3]) + ", " + str(Names[Grid[VariablesNumber["player_tile"]][4]]) + ", " + str(Names[Grid[VariablesNumber["player_tile"]][5]]), True, (255, 255, 255))
-        screen.blit(text, [10, 130])
-        text = font.render("Biome Info (Water, Temperature, Humidity): " + str(round(Grid[VariablesNumber["player_tile"]][0], 3)) + ", " + str(round(Grid[VariablesNumber["player_tile"]][1], 3)) + ", " + str(round(Grid[VariablesNumber["player_tile"]][2], 3)), True, (255, 255, 255))
-        screen.blit(text, [10, 160])
-        text = font.render("Time (%, #): " + str(round(VariablesNumber["time_day_percentage"], 1)) + ", " + str(VariablesNumber["time_seconds"] // VariablesNumber["time_day_length"]), True, (255, 255, 255))
-        screen.blit(text, [10, 190])
-    #Draw the hotbar/inventory
-    if VariablesBoolean["menu_inventory"]:
-        screen_effect_inventory.fill((  0,   0,   0, 128))
-    else:
-        screen_effect_inventory.fill((  0,   0,   0,   0))
-        pygame.draw.rect(screen_effect_inventory, (  0,   0,   0, 128), [0, Config["ScreenY"] - 97, Config["ScreenX"], 97])
-    screen.blit(screen_effect_inventory, (0, 0))
-    for i in range(32):
-        if i >= 8 and not VariablesBoolean["menu_inventory"]:
-            break
-        if VariablesNumber["hotbar"] == i and not VariablesBoolean["menu_inventory"]:
-            pygame.draw.rect(screen, (255, 255, 192), [InventoryMargins[i][0] - 8, InventoryMargins[i][1] - 8, 97, 97])
-        pygame.draw.rect(screen, (192, 192, 192), [InventoryMargins[i][0], InventoryMargins[i][1], 81, 81])
-        if not Inventory[i][0] == "":
-            screen.blit(Images[Inventory[i][0].replace(".png", "")], [InventoryMargins[i][0], InventoryMargins[i][1]])
+            screen_effect_inventory.fill((  0,   0,   0,   0))
+            pygame.draw.rect(screen_effect_inventory, (  0,   0,   0, 128), [0, Config["ScreenY"] - 97, Config["ScreenX"], 97])
+        screen.blit(screen_effect_inventory, (0, 0))
+        for i in range(32):
+            if i >= 8 and not Variables["menu_inventory"]:
+                break
+            if Variables["hotbar"] == i and not Variables["menu_inventory"]:
+                pygame.draw.rect(screen, (255, 255, 192), [InventoryMargins[i][0] - 8, InventoryMargins[i][1] - 8, 97, 97])
+            pygame.draw.rect(screen, (192, 192, 192), [InventoryMargins[i][0], InventoryMargins[i][1], 81, 81])
+            if not Inventory[i][0] == "":
+                screen.blit(Images[Inventory[i][0].replace(".png", "")], [InventoryMargins[i][0], InventoryMargins[i][1]])
+                font = pygame.font.SysFont("bahnschrift", 36)
+                text = font.render(str(Inventory[i][1]), True, (  0,   0,   0))
+                screen.blit(text, [InventoryMargins[i][0], InventoryMargins[i][1]])
+        if Variables["menu_inventory"] and not Item_Dragging == ["", 0]:
+            screen.blit(Images[Item_Dragging[0].replace(".png", "")], [mousex - 40.5, mousey - 40.5])
             font = pygame.font.SysFont("bahnschrift", 36)
-            text = font.render(str(Inventory[i][1]), True, (  0,   0,   0))
-            screen.blit(text, [InventoryMargins[i][0], InventoryMargins[i][1]])
-    if VariablesBoolean["menu_inventory"] and VariablesNumber["item_dragging"] >= 0:
-        screen.blit(Images[Inventory[VariablesNumber["item_dragging"]][0].replace(".png", "")], [mousex, mousey])
-    #Draw the health and hunger bars
-    if not VariablesBoolean["menu_inventory"]:
-        pygame.draw.rect(screen, (255,  51,  51), [8, Config["ScreenY"] - 125, VariablesNumber["health"] * 2, 20])
-        pygame.draw.rect(screen, (128,  51,  51), [Config["ScreenX"] - VariablesNumber["hunger"] * 2 - 8, Config["ScreenY"] - 125, VariablesNumber["hunger"] * 2, 20])
-        font = pygame.font.SysFont("bahnschrift", 20)
-        text = font.render(str(VariablesNumber["health"]), True, (255, 255, 255))
-        screen.blit(text, [8, Config["ScreenY"] - 125])
-        text = font.render(str(VariablesNumber["hunger"]), True, (255, 255, 255))
-        screen.blit(text, [Config["ScreenX"] - 28, Config["ScreenY"] - 125])
+            text = font.render(str(Item_Dragging[1]), True, (  0,   0,   0))
+            screen.blit(text, [mousex - 40.5, mousey - 40.5])
+        #Draw the health and hunger bars
+        if not Variables["menu_inventory"]:
+            pygame.draw.rect(screen, (255,  51,  51), [8, Config["ScreenY"] - 125, Variables["health"] * 2, 20])
+            pygame.draw.rect(screen, (128,  51,  51), [Config["ScreenX"] - Variables["hunger"] * 2 - 8, Config["ScreenY"] - 125, Variables["hunger"] * 2, 20])
+            font = pygame.font.SysFont("bahnschrift", 20)
+            text = font.render(str(Variables["health"]), True, (255, 255, 255))
+            screen.blit(text, [8, Config["ScreenY"] - 125])
+            text = font.render(str(Variables["hunger"]), True, (255, 255, 255))
+            screen.blit(text, [Config["ScreenX"] - 28, Config["ScreenY"] - 125])
     pygame.display.update()
 def main():
+    global Item_Dragging
+    global Item_Swap
     global mousex
     global mousey
     global screen
@@ -601,12 +710,15 @@ def main():
     #Resize images
     for i in range(len(Images)):
         if "entity-item" in ImagesList[i]:
-            scale = Settings["TileSize"] * VariablesNumber["camera_z"] * 0.75
+            scale = Settings["TileSize"] * Variables["camera_z"] * 0.75
         elif "item" in ImagesList[i]:
             scale = 81
         else:
-            scale = Settings["TileSize"] * VariablesNumber["camera_z"]
+            scale = Settings["TileSize"] * Variables["camera_z"]
         Images[ImagesList[i]] = pygame.transform.scale(Images[ImagesList[i]], (scale, scale))
+    #Make user interface
+    sprite = UI_Button(0, Config["ScreenX"] / 2, Config["ScreenY"] / 2, 120, 60, (255, 255, 255), (  0,   0,   0), "bahnschrift", 40, "Play")
+    sprites_group_ui.add(sprite)
     #Generate world
     for a in range(len(Grid)):
         tile_posx = (a + 0.5) % Settings["GridW"] * Settings["TileSize"]
@@ -629,6 +741,7 @@ def main():
         #Set the biome, ground and object for the tile
         if Grid[a][0] < -1 or Grid[a][0] > 1 and Grid[a][1] < -1 or Grid[a][1] > 1 and Grid[a][2] < -1 or Grid[a][2] > 1:
             Grid[a][4] = ("ground-dirt")
+        #Ocean biomes
         elif Grid[a][0] <= 0.1:
             if Grid[a][1] <= -0.33:
                 Grid[a][3] = "Cold Ocean"
@@ -643,11 +756,13 @@ def main():
                 Grid[a][3] = "Warm Ocean"
                 Grid[a][4] = "ground-warm_water"
         elif Grid[a][0] >= 0.1 and Grid[a][0] <= 0.2:
+            #Beach biome
             Grid[a][3] = "Beach"
             Grid[a][4] = "ground-sand"
         elif Grid[a][0] >= 0.2:
             if Grid[a][1] <= -0.33:
                 if Grid[a][2] <= -0.33:
+                    #Snow Plains biome
                     Grid[a][3] = "Snow Plains"
                     if random.randrange(0, 100) <= 10:
                         Grid[a][4] = "ground-ice"
@@ -656,6 +771,7 @@ def main():
                         if random.randrange(0, 100) <= 5:
                             Grid[a][5] = "object-dark_tree"
                 elif Grid[a][2] >= -0.33 and Grid[a][2] <= 0.33:
+                    #Snow Forest biome
                     Grid[a][3] = "Snow Forest"
                     Grid[a][4] = "ground-snow"
                     if random.randrange(0, 100) <= 25:
@@ -667,6 +783,7 @@ def main():
                         Grid[a][5] = "object-dark_tree"
             elif Grid[a][1] >= -0.33 and Grid[a][1] <= 0.33:
                 if Grid[a][2] <= -0.33:
+                    #Plains biome
                     Grid[a][3] = "Plains"
                     Grid[a][4] = "ground-grass"
                     if random.randrange(0, 100) <= 5:
@@ -675,6 +792,7 @@ def main():
                         else:
                             Grid[a][5] = "object-bright_tree"
                 elif Grid[a][2] >= -0.33 and Grid[a][2] <= 0.33:
+                    #Forest biome
                     Grid[a][3] = "Forest"
                     Grid[a][4] = "ground-grass"
                     if random.randrange(0, 100) <= 25:
@@ -683,6 +801,7 @@ def main():
                         else:
                             Grid[a][5] = "object-bright_tree"
                 elif Grid[a][2] >= 0.33:
+                    #Swamp biome
                     Grid[a][3] = "Swamp"
                     if random.randrange(0, 100) <= Grid[a][2] * 75 - 25:
                         Grid[a][4] = "ground-mud"
@@ -694,11 +813,13 @@ def main():
                         Grid[a][4] = "ground-water"
             elif Grid[a][1] >= 0.33:
                 if Grid[a][2] <= -0.33:
+                    #Desert biome
                     Grid[a][3] = "Desert"
                     Grid[a][4] = "ground-sand"
                     if random.randrange(0, 100) <= 5:
                         Grid[a][5] = "object-cactus"
                 elif Grid[a][2] >= -0.33 and Grid[a][2] <= 0.33:
+                    #Savanna biome
                     Grid[a][3] = "Savanna"
                     if random.randrange(0, 100) <= 25:
                         Grid[a][4] = "ground-sand"
@@ -710,6 +831,7 @@ def main():
                             else:
                                 Grid[a][5] = "object-bright_tree"
                 elif Grid[a][2] >= 0.33:
+                    #Jungle biome
                     Grid[a][3] = "Jungle"
                     if random.randrange(0, 100) <= Grid[a][2] * 120 - 30:
                         Grid[a][4] = "ground-warm_water"
@@ -751,48 +873,56 @@ def main():
             #Exit window
             if event.type == pygame.QUIT:
                 sys.exit()
+            #Check for mouse clicks
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                #Drag items in the inventory
+                if Variables["menu_inventory"] and mousey >= 356:
+                    Item_Swap = Inventory[find_item_from_pos(mousex, mousey)]
+                    Inventory[find_item_from_pos(mousex, mousey)] = Item_Dragging
+                    Item_Dragging = Item_Swap
+                    Item_Swap = ["", 0]
             #Check for key presses
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_1:
-                    if not VariablesBoolean["menu_inventory"]:
-                        VariablesNumber["hotbar"] = 0
+                    if not Variables["menu_inventory"]:
+                        Variables["hotbar"] = 0
                 if event.key == pygame.K_2:
-                    if not VariablesBoolean["menu_inventory"]:
-                        VariablesNumber["hotbar"] = 1
+                    if not Variables["menu_inventory"]:
+                        Variables["hotbar"] = 1
                 if event.key == pygame.K_3:
-                    if not VariablesBoolean["menu_inventory"]:
-                        VariablesNumber["hotbar"] = 2
+                    if not Variables["menu_inventory"]:
+                        Variables["hotbar"] = 2
                 if event.key == pygame.K_4:
-                    if not VariablesBoolean["menu_inventory"]:
-                        VariablesNumber["hotbar"] = 3
+                    if not Variables["menu_inventory"]:
+                        Variables["hotbar"] = 3
                 if event.key == pygame.K_5:
-                    if not VariablesBoolean["menu_inventory"]:
-                        VariablesNumber["hotbar"] = 4
+                    if not Variables["menu_inventory"]:
+                        Variables["hotbar"] = 4
                 if event.key == pygame.K_6:
-                    if not VariablesBoolean["menu_inventory"]:
-                        VariablesNumber["hotbar"] = 5
+                    if not Variables["menu_inventory"]:
+                        Variables["hotbar"] = 5
                 if event.key == pygame.K_7:
-                    if not VariablesBoolean["menu_inventory"]:
-                        VariablesNumber["hotbar"] = 6
+                    if not Variables["menu_inventory"]:
+                        Variables["hotbar"] = 6
                 if event.key == pygame.K_8:
-                    if not VariablesBoolean["menu_inventory"]:
-                        VariablesNumber["hotbar"] = 7
+                    if not Variables["menu_inventory"]:
+                        Variables["hotbar"] = 7
                 if event.key == pygame.K_a:
                     Keys["A"] = True
                 if event.key == pygame.K_d:
                     Keys["D"] = True
                 #Open/Close inventory
                 if event.key == pygame.K_e:
-                    if VariablesBoolean["menu_inventory"]:
-                        VariablesBoolean["menu_inventory"] = False
+                    if Variables["menu_inventory"]:
+                        Variables["menu_inventory"] = False
                     else:
-                        VariablesBoolean["menu_inventory"] = True
+                        Variables["menu_inventory"] = True
                 #Open/Close debug screen
                 if event.key == pygame.K_q:
-                    if VariablesBoolean["menu_debug"]:
-                        VariablesBoolean["menu_debug"] = False
+                    if Variables["menu_debug"]:
+                        Variables["menu_debug"] = False
                     else:
-                        VariablesBoolean["menu_debug"] = True
+                        Variables["menu_debug"] = True
                 if event.key == pygame.K_s:
                     Keys["S"] = True
                 if event.key == pygame.K_w:
@@ -806,44 +936,46 @@ def main():
                     Keys["S"] = False
                 if event.key == pygame.K_w:
                     Keys["W"] = False
-        if pygame.mouse.get_pressed()[0] == 1:
-            if VariablesBoolean["menu_inventory"]:
-                if VariablesNumber["item_dragging"] >= 0:
-                    VariablesNumber["item_dragging"] = -1
-                else:
-                    VariablesNumber["item_dragging"] = int((mousex / (Config["ScreenX"] / 8)) // 1 + ((mousey * -1 + Config["ScreenY"]) / (Config["ScreenY"] / 8)) // 1 * 8)
-            else:
-                find_tile_from_pos(mousex, mousey)
+        #Destroying objects/tiles
+        if pygame.mouse.get_pressed()[0] == 1 and not Variables["menu_inventory"]:
+            find_tile_from_pos(mousex, mousey)
         #Health and hunger loss
-        if VariablesNumber["health"] > 0:
-            if VariablesNumber["hunger"] == 0 and random.randrange(0, 100) <= 1:
-                VariablesNumber["health"] -= 1
-        if VariablesNumber["hunger"] > 0:
+        if Variables["health"] > 0:
+            if Variables["hunger"] == 0 and random.randrange(0, 100) <= 1:
+                Variables["health"] -= 1
+        if Variables["hunger"] > 0:
             if Keys["A"] or Keys["D"] or Keys["S"] or Keys["W"]:
-                if random.randrange(0, 100) <= 2:
-                    VariablesNumber["hunger"] -= 1
-            else:
                 if random.randrange(0, 100) <= 1:
-                    VariablesNumber["hunger"] -= 1
-            if Cooldowns_Time["cooldown-cactus"] <= VariablesNumber["time_seconds"] - Cooldowns_Length["cooldown-cactus"] and Grid[VariablesNumber["player_tile"]][5] == "object-cactus":
-                Cooldowns_Time["cooldown-cactus"] = VariablesNumber["time_seconds"]
-                VariablesNumber["health"] -= random.randint(5, 10)
-                if VariablesNumber["health"] < 0:
-                    VariablesNumber["health"] = 0
-        if Grid[VariablesNumber["player_tile"]][5] == "object-cactus":
-            if Cooldowns_Time["cooldown-cactus"] <= VariablesNumber["time_seconds"] - Cooldowns_Length["cooldown-cactus"]:
-                if VariablesNumber["health"] > 0:
-                    Cooldowns_Time["cooldown-cactus"] = VariablesNumber["time_seconds"]
-                    VariablesNumber["health"] -= random.randint(5, 10)
-                    if VariablesNumber["health"] < 0:
-                        VariablesNumber["health"] = 0
+                    Variables["hunger"] -= 1
+            else:
+                if random.randrange(0, 100) <= 0.5:
+                    Variables["hunger"] -= 1
+            if Cooldowns_Time["cooldown-cactus"] <= Variables["time_seconds"] - Cooldowns_Length["cooldown-cactus"] and Grid[Variables["player_tile"]][5] == "object-cactus":
+                Cooldowns_Time["cooldown-cactus"] = Variables["time_seconds"]
+                Variables["health"] -= random.randint(5, 10)
+                if Variables["health"] < 0:
+                    Variables["health"] = 0
+        if Grid[Variables["player_tile"]][5] == "object-cactus":
+            if Cooldowns_Time["cooldown-cactus"] <= Variables["time_seconds"] - Cooldowns_Length["cooldown-cactus"]:
+                if Variables["health"] > 0:
+                    Cooldowns_Time["cooldown-cactus"] = Variables["time_seconds"]
+                    Variables["health"] -= random.randint(5, 10)
+                    if Variables["health"] < 0:
+                        Variables["health"] = 0
         #Health gaining
-        if Cooldowns_Time["cooldown-health"] <= VariablesNumber["time_seconds"] - Cooldowns_Length["cooldown-cactus"] and VariablesNumber["health"] < 100:
-            Cooldowns_Time["cooldown-health"] = VariablesNumber["time_seconds"]
-            VariablesNumber["health"] += 1
+        if Cooldowns_Time["cooldown-health"] <= Variables["time_seconds"] - Cooldowns_Length["cooldown-cactus"] and Variables["health"] < 100:
+            Cooldowns_Time["cooldown-health"] = Variables["time_seconds"]
+            Variables["health"] += 1
+        #Food eating
+        if pygame.mouse.get_pressed()[2] == 1 and Variables["menu_inventory"] == 0 and Variables["hunger"] < 100:
+            if Inventory[Variables["hotbar"]][0] == "item-apple":
+                itemremove(Variables["hotbar"])
+                Variables["hunger"] += 10
+            if Variables["hunger"] > 100:
+                Variables["hunger"] = 100
         #Grass spreading
-        for i in range(int((Settings["GridW"] // VariablesNumber["camera_z"] + 2) ** 2)):
-            tile = int(VariablesNumber["player_tile"] + (((i + 0.5) % 19) - 9.5) + (((i + 0.5) / 19) // 1 - 9) * Settings["GridW"])
+        for i in range(int((Settings["GridW"] // Variables["camera_z"] + 2) ** 2)):
+            tile = int(Variables["player_tile"] + (((i + 0.5) % 19) - 9.5) + (((i + 0.5) / 19) // 1 - 9) * Settings["GridW"])
             if Grid[tile][4] == "ground-dirt" and random.randint(0, 100) <= 0.0001:
                 if "ground-grass" in Grid[tile - Settings["GridW"]][4] + Grid[tile - 1][4] + Grid[tile + 1][4] + Grid[tile + Settings["GridW"]][4]:
                     if "ground-dark_grass" in Grid[tile - Settings["GridW"]][4] + Grid[tile - 1][4] + Grid[tile + 1][4] + Grid[tile + Settings["GridW"]][4]:
@@ -857,40 +989,42 @@ def main():
                     if "ground-dark_grass" in Grid[tile - Settings["GridW"]][4] + Grid[tile - 1][4] + Grid[tile + 1][4] + Grid[tile + Settings["GridW"]][4]:
                         Grid[tile][4] = "ground-dark_grass"
         #Set camera X and Y and change them if the player is near the edge of the world
-        VariablesNumber["camera_x"] = VariablesNumber["player_posx"]
-        if VariablesNumber["camera_x"] < Config["ScreenX"] / VariablesNumber["camera_z"] / 2:
-            VariablesNumber["camera_x"] = Config["ScreenX"] / VariablesNumber["camera_z"] / 2
-        if VariablesNumber["camera_x"] > Config["ScreenX"] - Config["ScreenX"] / VariablesNumber["camera_z"] / 2:
-            VariablesNumber["camera_x"] = Config["ScreenX"] - Config["ScreenX"] / VariablesNumber["camera_z"] / 2
-        VariablesNumber["camera_y"] = VariablesNumber["player_posy"]
-        if VariablesNumber["camera_y"] < Config["ScreenY"] / VariablesNumber["camera_z"] / 2:
-            VariablesNumber["camera_y"] = Config["ScreenY"] / VariablesNumber["camera_z"] / 2
-        if VariablesNumber["camera_y"] > Config["ScreenY"] - Config["ScreenY"] / VariablesNumber["camera_z"] / 2:
-            VariablesNumber["camera_y"] = Config["ScreenY"] - Config["ScreenY"] / VariablesNumber["camera_z"] / 2
+        Variables["camera_x"] = Variables["player_posx"]
+        if Variables["camera_x"] < Config["ScreenX"] / Variables["camera_z"] / 2:
+            Variables["camera_x"] = Config["ScreenX"] / Variables["camera_z"] / 2
+        if Variables["camera_x"] > Config["ScreenX"] - Config["ScreenX"] / Variables["camera_z"] / 2:
+            Variables["camera_x"] = Config["ScreenX"] - Config["ScreenX"] / Variables["camera_z"] / 2
+        Variables["camera_y"] = Variables["player_posy"]
+        if Variables["camera_y"] < Config["ScreenY"] / Variables["camera_z"] / 2:
+            Variables["camera_y"] = Config["ScreenY"] / Variables["camera_z"] / 2
+        if Variables["camera_y"] > Config["ScreenY"] - Config["ScreenY"] / Variables["camera_z"] / 2:
+            Variables["camera_y"] = Config["ScreenY"] - Config["ScreenY"] / Variables["camera_z"] / 2
+        #Update sprites
         sprites_group_entity.update()
         sprites_group_tile.update()
+        sprites_group_ui.update()
         #Set time and change time lighting
-        VariablesNumber["time_frames"] += 1
-        VariablesNumber["time_seconds"] = VariablesNumber["time_frames"] / Config["Framerate"]
-        VariablesNumber["time_day_percentage"] = (100 / VariablesNumber["time_day_length"]) * (VariablesNumber["time_seconds"] % VariablesNumber["time_day_length"])
-        if VariablesNumber["time_day_percentage"] <= 12.5:
-            screen_effect_time.set_alpha(VariablesNumber["time_day_percentage"] * (-128 / 25) + 64)
+        Variables["time_frames"] += 1
+        Variables["time_seconds"] = Variables["time_frames"] / Config["Framerate"]
+        Variables["time_day_percentage"] = (100 / Variables["time_day_length"]) * (Variables["time_seconds"] % Variables["time_day_length"])
+        if Variables["time_day_percentage"] <= 12.5:
+            screen_effect_time.set_alpha(Variables["time_day_percentage"] * (-128 / 25) + 64)
             screen_effect_time.fill((255, 128,   0))
-        elif VariablesNumber["time_day_percentage"] >= 12.5 and VariablesNumber["time_day_percentage"] <= 37.5:
+        elif Variables["time_day_percentage"] >= 12.5 and Variables["time_day_percentage"] <= 37.5:
             screen_effect_time.set_alpha(0)
             screen_effect_time.fill((255, 128,   0))
-        elif VariablesNumber["time_day_percentage"] >= 37.5 and VariablesNumber["time_day_percentage"] <= 50:
-            screen_effect_time.set_alpha(VariablesNumber["time_day_percentage"] * (128 / 25) - 192)
+        elif Variables["time_day_percentage"] >= 37.5 and Variables["time_day_percentage"] <= 50:
+            screen_effect_time.set_alpha(Variables["time_day_percentage"] * (128 / 25) - 192)
             screen_effect_time.fill((255, 128,   0))
-        elif VariablesNumber["time_day_percentage"] >= 50 and VariablesNumber["time_day_percentage"] <= 62.5:
-            screen_effect_time.set_alpha(VariablesNumber["time_day_percentage"] * (128 / 25) - 192)
-            screen_effect_time.fill((VariablesNumber["time_day_percentage"] * (-512 / 25) + 1280, VariablesNumber["time_day_percentage"] * (-256 / 25) + 640, VariablesNumber["time_day_percentage"] * (256 / 25) - 512))
-        elif VariablesNumber["time_day_percentage"] >= 62.5 and VariablesNumber["time_day_percentage"] <= 87.5:
+        elif Variables["time_day_percentage"] >= 50 and Variables["time_day_percentage"] <= 62.5:
+            screen_effect_time.set_alpha(Variables["time_day_percentage"] * (128 / 25) - 192)
+            screen_effect_time.fill((Variables["time_day_percentage"] * (-512 / 25) + 1280, Variables["time_day_percentage"] * (-256 / 25) + 640, Variables["time_day_percentage"] * (256 / 25) - 512))
+        elif Variables["time_day_percentage"] >= 62.5 and Variables["time_day_percentage"] <= 87.5:
             screen_effect_time.set_alpha(128)
             screen_effect_time.fill((  0,   0, 128))
-        elif VariablesNumber["time_day_percentage"] >= 87.5:
-            screen_effect_time.set_alpha(VariablesNumber["time_day_percentage"] * (-128 / 25) + 576)
-            screen_effect_time.fill((VariablesNumber["time_day_percentage"] * (512 / 25) - 1792, VariablesNumber["time_day_percentage"] * (256 / 25) - 896, VariablesNumber["time_day_percentage"] * (-256 / 25) + 1024))
+        elif Variables["time_day_percentage"] >= 87.5:
+            screen_effect_time.set_alpha(Variables["time_day_percentage"] * (-128 / 25) + 576)
+            screen_effect_time.fill((Variables["time_day_percentage"] * (512 / 25) - 1792, Variables["time_day_percentage"] * (256 / 25) - 896, Variables["time_day_percentage"] * (-256 / 25) + 1024))
         draw()
         clock.tick(Config["Framerate"])
 if __name__ == "__main__":
