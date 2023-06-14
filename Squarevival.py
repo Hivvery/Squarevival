@@ -244,6 +244,8 @@ Variables = {
     "camera_z"           : Settings["GridW"] / 18,
     #Whether the player is in a world or not
     "game"               : False,
+    #Whether the player is in a world unpaused or not
+    "game_running"       : False,
     #Player's health points
     "health"             : 100,
     #Hotbar item selected
@@ -493,8 +495,14 @@ class UI_Button(pygame.sprite.Sprite):
     def update(self):
         if self.rect.collidepoint(pygame.mouse.get_pos()):
             if pygame.mouse.get_pressed()[0] == 1:
-                if self.identity == 0:
+                if self.identity == 0 and Variables["page"] == 0:
                     Variables["page"] = 4
+                    Variables["game"] = True
+                    Variables["game_running"] = True
+                elif self.identity == 1 and Variables["page"] == 0:
+                    Variables["menu_settings"] = True
+                elif self.identity == 2 and Variables["page"] == 0:
+                    Variables["page"] = 3
         self.rect.center = (self.pos_x, self.pos_y)
 
 #FUNCTIONS
@@ -603,7 +611,13 @@ def structure_lake(tile):
     structure_depth -= 1
 #Draw the screen
 def draw():
-    if Variables["page"] == 0:
+    if Variables["menu_settings"]:
+        screen.fill((  0, 187,   0))
+        font = pygame.font.SysFont("bahnschrift", 75)
+        text = font.render("Settings", True, (255, 255, 255))
+        text_rect = text.get_rect(center=(Config["ScreenX"] / 2, 50))
+        screen.blit(text, text_rect)
+    elif Variables["page"] == 0:
         screen.fill((  0, 255, 102))
         sprites_group_ui.draw(screen)
         font = pygame.font.SysFont("bahnschrift", 100)
@@ -611,11 +625,11 @@ def draw():
         text_rect = text.get_rect(center=(Config["ScreenX"] / 2, 75))
         screen.blit(text, text_rect)
     elif Variables["page"] == 1:
-        pass
+        screen.fill((  0, 255, 102))
     elif Variables["page"] == 2:
-        pass
+        screen.fill((  0, 255, 102))
     elif Variables["page"] == 3:
-        pass
+        screen.fill((  0,   0,   0))
     elif Variables["page"] == 4:
         screen.fill((  0,   0,   0))
         for i in range(int((Settings["GridW"] // Variables["camera_z"] + 2) ** 2)):
@@ -637,7 +651,14 @@ def draw():
         sprites_group_entity.draw(screen)
         screen.blit(screen_effect_time, (0, 0))
         #Draw the debug screen
-        if Variables["menu_debug"] and not Variables["menu_inventory"]:
+        if Variables["menu_pause"]:
+            screen_effect_pause.fill((  0,   0,   0, 128))
+            font = pygame.font.SysFont("bahnschrift", 50)
+            text = font.render("Game Paused", True, (255, 255, 255))
+            text_rect = text.get_rect(center=(Config["ScreenX"] / 2, Config["ScreenY"] / 2))
+            screen_effect_pause.blit(text, text_rect)
+            screen.blit(screen_effect_pause, (0, 0))
+        elif Variables["menu_debug"] and not Variables["menu_inventory"]:
             pygame.draw.rect(screen, (  0,   0,   0), [5, 5, Config["ScreenX"] - 10, 210])
             font = pygame.font.SysFont("bahnschrift", 20)
             text = font.render(Config["ScreenCaption"], True, (255, 255, 255))
@@ -658,37 +679,40 @@ def draw():
             text = font.render("Time (%, #): " + str(round(Variables["time_day_percentage"], 1)) + ", " + str(Variables["time_seconds"] // Variables["time_day_length"]), True, (255, 255, 255))
             screen.blit(text, [10, 190])
         #Draw the hotbar/inventory
-        if Variables["menu_inventory"]:
-            screen_effect_inventory.fill((  0,   0,   0, 128))
-        else:
-            screen_effect_inventory.fill((  0,   0,   0,   0))
-            pygame.draw.rect(screen_effect_inventory, (  0,   0,   0, 128), [0, Config["ScreenY"] - 97, Config["ScreenX"], 97])
-        screen.blit(screen_effect_inventory, (0, 0))
-        for i in range(32):
-            if i >= 8 and not Variables["menu_inventory"]:
-                break
-            if Variables["hotbar"] == i and not Variables["menu_inventory"]:
-                pygame.draw.rect(screen, (255, 255, 192), [InventoryMargins[i][0] - 8, InventoryMargins[i][1] - 8, 97, 97])
-            pygame.draw.rect(screen, (192, 192, 192), [InventoryMargins[i][0], InventoryMargins[i][1], 81, 81])
-            if not Inventory[i][0] == "":
-                screen.blit(Images[Inventory[i][0].replace(".png", "")], [InventoryMargins[i][0], InventoryMargins[i][1]])
+        if Variables["game_running"]:
+            if Variables["menu_inventory"]:
+                screen_effect_inventory.fill((  0,   0,   0, 128))
+            else:
+                screen_effect_inventory.fill((  0,   0,   0,   0))
+                pygame.draw.rect(screen_effect_inventory, (  0,   0,   0, 128), [0, Config["ScreenY"] - 97, Config["ScreenX"], 97])
+            screen.blit(screen_effect_inventory, (0, 0))
+            for i in range(32):
+                if i >= 8 and not Variables["menu_inventory"]:
+                    break
+                if Variables["hotbar"] == i and not Variables["menu_inventory"]:
+                    pygame.draw.rect(screen, (255, 255, 192), [InventoryMargins[i][0] - 8, InventoryMargins[i][1] - 8, 97, 97])
+                pygame.draw.rect(screen, (192, 192, 192), [InventoryMargins[i][0], InventoryMargins[i][1], 81, 81])
+                if not Inventory[i][0] == "":
+                    screen.blit(Images[Inventory[i][0].replace(".png", "")], [InventoryMargins[i][0], InventoryMargins[i][1]])
+                    font = pygame.font.SysFont("bahnschrift", 36)
+                    text = font.render(str(Inventory[i][1]), True, (  0,   0,   0))
+                    screen.blit(text, [InventoryMargins[i][0], InventoryMargins[i][1]])
+            if Variables["menu_inventory"] and not Item_Dragging == ["", 0]:
+                screen.blit(Images[Item_Dragging[0].replace(".png", "")], [mousex - 40.5, mousey - 40.5])
                 font = pygame.font.SysFont("bahnschrift", 36)
-                text = font.render(str(Inventory[i][1]), True, (  0,   0,   0))
-                screen.blit(text, [InventoryMargins[i][0], InventoryMargins[i][1]])
-        if Variables["menu_inventory"] and not Item_Dragging == ["", 0]:
-            screen.blit(Images[Item_Dragging[0].replace(".png", "")], [mousex - 40.5, mousey - 40.5])
-            font = pygame.font.SysFont("bahnschrift", 36)
-            text = font.render(str(Item_Dragging[1]), True, (  0,   0,   0))
-            screen.blit(text, [mousex - 40.5, mousey - 40.5])
+                text = font.render(str(Item_Dragging[1]), True, (  0,   0,   0))
+                screen.blit(text, [mousex - 40.5, mousey - 40.5])
         #Draw the health and hunger bars
-        if not Variables["menu_inventory"]:
+        if Variables["game_running"] and not Variables["menu_inventory"]:
             pygame.draw.rect(screen, (255,  51,  51), [8, Config["ScreenY"] - 125, Variables["health"] * 2, 20])
             pygame.draw.rect(screen, (128,  51,  51), [Config["ScreenX"] - Variables["hunger"] * 2 - 8, Config["ScreenY"] - 125, Variables["hunger"] * 2, 20])
             font = pygame.font.SysFont("bahnschrift", 20)
             text = font.render(str(Variables["health"]), True, (255, 255, 255))
-            screen.blit(text, [8, Config["ScreenY"] - 125])
+            text_rect = text.get_rect(center=(25, Config["ScreenY"] - 115))
+            screen.blit(text, text_rect)
             text = font.render(str(Variables["hunger"]), True, (255, 255, 255))
-            screen.blit(text, [Config["ScreenX"] - 28, Config["ScreenY"] - 125])
+            text_rect = text.get_rect(center=(Config["ScreenX"] - 25, Config["ScreenY"] - 115))
+            screen.blit(text, text_rect)
     pygame.display.update()
 def main():
     global Item_Dragging
@@ -697,11 +721,13 @@ def main():
     global mousey
     global screen
     global screen_effect_inventory
+    global screen_effect_pause
     global screen_effect_time
     clock = pygame.time.Clock()
     #Screen and screen effects
     screen = pygame.display.set_mode((Config["ScreenX"], Config["ScreenY"]))
     screen_effect_inventory = pygame.Surface((Config["ScreenX"], Config["ScreenY"]), pygame.SRCALPHA)
+    screen_effect_pause = pygame.Surface((Config["ScreenX"], Config["ScreenY"]), pygame.SRCALPHA)
     screen_effect_time = pygame.Surface((Config["ScreenX"], Config["ScreenY"]))
     screen_effect_time.set_alpha(64)
     screen_effect_time.fill((255, 128,   0))
@@ -717,7 +743,11 @@ def main():
             scale = Settings["TileSize"] * Variables["camera_z"]
         Images[ImagesList[i]] = pygame.transform.scale(Images[ImagesList[i]], (scale, scale))
     #Make user interface
-    sprite = UI_Button(0, Config["ScreenX"] / 2, Config["ScreenY"] / 2, 120, 60, (255, 255, 255), (  0,   0,   0), "bahnschrift", 40, "Play")
+    sprite = UI_Button(0, Config["ScreenX"] / 2 - 200, 200, 160, 80, (255, 255, 255), (  0,   0,   0), "bahnschrift", 40, "Play")
+    sprites_group_ui.add(sprite)
+    sprite = UI_Button(1, Config["ScreenX"] / 2, 200, 160, 80, (255, 255, 255), (  0,   0,   0), "bahnschrift", 40, "Settings")
+    sprites_group_ui.add(sprite)
+    sprite = UI_Button(2, Config["ScreenX"] / 2 + 200, 200, 160, 80, (255, 255, 255), (  0,   0,   0), "bahnschrift", 40, "Credits")
     sprites_group_ui.add(sprite)
     #Generate world
     for a in range(len(Grid)):
@@ -883,51 +913,59 @@ def main():
                     Item_Swap = ["", 0]
             #Check for key presses
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_1:
-                    if not Variables["menu_inventory"]:
-                        Variables["hotbar"] = 0
-                if event.key == pygame.K_2:
-                    if not Variables["menu_inventory"]:
-                        Variables["hotbar"] = 1
-                if event.key == pygame.K_3:
-                    if not Variables["menu_inventory"]:
-                        Variables["hotbar"] = 2
-                if event.key == pygame.K_4:
-                    if not Variables["menu_inventory"]:
-                        Variables["hotbar"] = 3
-                if event.key == pygame.K_5:
-                    if not Variables["menu_inventory"]:
-                        Variables["hotbar"] = 4
-                if event.key == pygame.K_6:
-                    if not Variables["menu_inventory"]:
-                        Variables["hotbar"] = 5
-                if event.key == pygame.K_7:
-                    if not Variables["menu_inventory"]:
-                        Variables["hotbar"] = 6
-                if event.key == pygame.K_8:
-                    if not Variables["menu_inventory"]:
-                        Variables["hotbar"] = 7
-                if event.key == pygame.K_a:
-                    Keys["A"] = True
-                if event.key == pygame.K_d:
-                    Keys["D"] = True
-                #Open/Close inventory
-                if event.key == pygame.K_e:
-                    if Variables["menu_inventory"]:
-                        Variables["menu_inventory"] = False
+                if Variables["game_running"]:
+                    if event.key == pygame.K_1:
+                        if not Variables["menu_inventory"]:
+                            Variables["hotbar"] = 0
+                    if event.key == pygame.K_2:
+                        if not Variables["menu_inventory"]:
+                            Variables["hotbar"] = 1
+                    if event.key == pygame.K_3:
+                        if not Variables["menu_inventory"]:
+                            Variables["hotbar"] = 2
+                    if event.key == pygame.K_4:
+                        if not Variables["menu_inventory"]:
+                            Variables["hotbar"] = 3
+                    if event.key == pygame.K_5:
+                        if not Variables["menu_inventory"]:
+                            Variables["hotbar"] = 4
+                    if event.key == pygame.K_6:
+                        if not Variables["menu_inventory"]:
+                            Variables["hotbar"] = 5
+                    if event.key == pygame.K_7:
+                        if not Variables["menu_inventory"]:
+                            Variables["hotbar"] = 6
+                    if event.key == pygame.K_8:
+                        if not Variables["menu_inventory"]:
+                            Variables["hotbar"] = 7
+                    if event.key == pygame.K_a:
+                        Keys["A"] = True
+                    if event.key == pygame.K_d:
+                        Keys["D"] = True
+                    #Open/Close inventory
+                    if event.key == pygame.K_e:
+                        if Variables["menu_inventory"]:
+                            Variables["menu_inventory"] = False
+                        else:
+                            Variables["menu_inventory"] = True
+                    #Open/Close debug screen
+                    if event.key == pygame.K_q:
+                        if Variables["menu_debug"]:
+                            Variables["menu_debug"] = False
+                        else:
+                            Variables["menu_debug"] = True
+                    if event.key == pygame.K_s:
+                        Keys["S"] = True
+                    if event.key == pygame.K_w:
+                        Keys["W"] = True
+                if event.key == pygame.K_ESCAPE and Variables["page"] == 4 and not Variables["menu_inventory"]:
+                    if Variables["game_running"]:
+                        Variables["game_running"] = False
+                        Variables["menu_pause"] = True
                     else:
-                        Variables["menu_inventory"] = True
-                #Open/Close debug screen
-                if event.key == pygame.K_q:
-                    if Variables["menu_debug"]:
-                        Variables["menu_debug"] = False
-                    else:
-                        Variables["menu_debug"] = True
-                if event.key == pygame.K_s:
-                    Keys["S"] = True
-                if event.key == pygame.K_w:
-                    Keys["W"] = True
-            if event.type == pygame.KEYUP:
+                        Variables["game_running"] = True
+                        Variables["menu_pause"] = False
+            if event.type == pygame.KEYUP and Variables["game_running"]:
                 if event.key == pygame.K_a:
                     Keys["A"] = False
                 if event.key == pygame.K_d:
@@ -936,95 +974,96 @@ def main():
                     Keys["S"] = False
                 if event.key == pygame.K_w:
                     Keys["W"] = False
-        #Destroying objects/tiles
-        if pygame.mouse.get_pressed()[0] == 1 and not Variables["menu_inventory"]:
-            find_tile_from_pos(mousex, mousey)
-        #Health and hunger loss
-        if Variables["health"] > 0:
-            if Variables["hunger"] == 0 and random.randrange(0, 100) <= 1:
-                Variables["health"] -= 1
-        if Variables["hunger"] > 0:
-            if Keys["A"] or Keys["D"] or Keys["S"] or Keys["W"]:
-                if random.randrange(0, 100) <= 1:
-                    Variables["hunger"] -= 1
-            else:
-                if random.randrange(0, 100) <= 0.5:
-                    Variables["hunger"] -= 1
-            if Cooldowns_Time["cooldown-cactus"] <= Variables["time_seconds"] - Cooldowns_Length["cooldown-cactus"] and Grid[Variables["player_tile"]][5] == "object-cactus":
-                Cooldowns_Time["cooldown-cactus"] = Variables["time_seconds"]
-                Variables["health"] -= random.randint(5, 10)
-                if Variables["health"] < 0:
-                    Variables["health"] = 0
-        if Grid[Variables["player_tile"]][5] == "object-cactus":
-            if Cooldowns_Time["cooldown-cactus"] <= Variables["time_seconds"] - Cooldowns_Length["cooldown-cactus"]:
-                if Variables["health"] > 0:
+        if Variables["game_running"]:
+            #Destroying objects/tiles
+            if pygame.mouse.get_pressed()[0] == 1 and not Variables["menu_inventory"]:
+                find_tile_from_pos(mousex, mousey)
+            #Health and hunger loss
+            if Variables["health"] > 0:
+                if Variables["hunger"] == 0 and random.randrange(0, 100) <= 1:
+                    Variables["health"] -= 1
+            if Variables["hunger"] > 0:
+                if Keys["A"] or Keys["D"] or Keys["S"] or Keys["W"]:
+                    if random.randrange(0, 100) <= 1:
+                        Variables["hunger"] -= 1
+                else:
+                    if random.randrange(0, 100) <= 0.5:
+                        Variables["hunger"] -= 1
+                if Cooldowns_Time["cooldown-cactus"] <= Variables["time_seconds"] - Cooldowns_Length["cooldown-cactus"] and Grid[Variables["player_tile"]][5] == "object-cactus":
                     Cooldowns_Time["cooldown-cactus"] = Variables["time_seconds"]
                     Variables["health"] -= random.randint(5, 10)
                     if Variables["health"] < 0:
                         Variables["health"] = 0
-        #Health gaining
-        if Cooldowns_Time["cooldown-health"] <= Variables["time_seconds"] - Cooldowns_Length["cooldown-cactus"] and Variables["health"] < 100:
-            Cooldowns_Time["cooldown-health"] = Variables["time_seconds"]
-            Variables["health"] += 1
-        #Food eating
-        if pygame.mouse.get_pressed()[2] == 1 and Variables["menu_inventory"] == 0 and Variables["hunger"] < 100:
-            if Inventory[Variables["hotbar"]][0] == "item-apple":
-                itemremove(Variables["hotbar"])
-                Variables["hunger"] += 10
-            if Variables["hunger"] > 100:
-                Variables["hunger"] = 100
-        #Grass spreading
-        for i in range(int((Settings["GridW"] // Variables["camera_z"] + 2) ** 2)):
-            tile = int(Variables["player_tile"] + (((i + 0.5) % 19) - 9.5) + (((i + 0.5) / 19) // 1 - 9) * Settings["GridW"])
-            if Grid[tile][4] == "ground-dirt" and random.randint(0, 100) <= 0.0001:
-                if "ground-grass" in Grid[tile - Settings["GridW"]][4] + Grid[tile - 1][4] + Grid[tile + 1][4] + Grid[tile + Settings["GridW"]][4]:
-                    if "ground-dark_grass" in Grid[tile - Settings["GridW"]][4] + Grid[tile - 1][4] + Grid[tile + 1][4] + Grid[tile + Settings["GridW"]][4]:
-                        if random.randrange(0, 100) <= 50:
-                            Grid[tile][4] = "ground-grass"
+            if Grid[Variables["player_tile"]][5] == "object-cactus":
+                if Cooldowns_Time["cooldown-cactus"] <= Variables["time_seconds"] - Cooldowns_Length["cooldown-cactus"]:
+                    if Variables["health"] > 0:
+                        Cooldowns_Time["cooldown-cactus"] = Variables["time_seconds"]
+                        Variables["health"] -= random.randint(5, 10)
+                        if Variables["health"] < 0:
+                            Variables["health"] = 0
+            #Health gaining
+            if Cooldowns_Time["cooldown-health"] <= Variables["time_seconds"] - Cooldowns_Length["cooldown-cactus"] and Variables["health"] < 100:
+                Cooldowns_Time["cooldown-health"] = Variables["time_seconds"]
+                Variables["health"] += 1
+            #Food eating
+            if pygame.mouse.get_pressed()[2] == 1 and Variables["menu_inventory"] == 0 and Variables["hunger"] < 100:
+                if Inventory[Variables["hotbar"]][0] == "item-apple":
+                    itemremove(Variables["hotbar"])
+                    Variables["hunger"] += 10
+                if Variables["hunger"] > 100:
+                    Variables["hunger"] = 100
+            #Grass spreading
+            for i in range(int((Settings["GridW"] // Variables["camera_z"] + 2) ** 2)):
+                tile = int(Variables["player_tile"] + (((i + 0.5) % 19) - 9.5) + (((i + 0.5) / 19) // 1 - 9) * Settings["GridW"])
+                if Grid[tile][4] == "ground-dirt" and random.randint(0, 100) <= 0.0001:
+                    if "ground-grass" in Grid[tile - Settings["GridW"]][4] + Grid[tile - 1][4] + Grid[tile + 1][4] + Grid[tile + Settings["GridW"]][4]:
+                        if "ground-dark_grass" in Grid[tile - Settings["GridW"]][4] + Grid[tile - 1][4] + Grid[tile + 1][4] + Grid[tile + Settings["GridW"]][4]:
+                            if random.randrange(0, 100) <= 50:
+                                Grid[tile][4] = "ground-grass"
+                            else:
+                                Grid[tile][4] = "ground-dark_grass"
                         else:
-                            Grid[tile][4] = "ground-dark_grass"
+                            Grid[tile][4] = "ground-grass"
                     else:
-                        Grid[tile][4] = "ground-grass"
-                else:
-                    if "ground-dark_grass" in Grid[tile - Settings["GridW"]][4] + Grid[tile - 1][4] + Grid[tile + 1][4] + Grid[tile + Settings["GridW"]][4]:
-                        Grid[tile][4] = "ground-dark_grass"
-        #Set camera X and Y and change them if the player is near the edge of the world
-        Variables["camera_x"] = Variables["player_posx"]
-        if Variables["camera_x"] < Config["ScreenX"] / Variables["camera_z"] / 2:
-            Variables["camera_x"] = Config["ScreenX"] / Variables["camera_z"] / 2
-        if Variables["camera_x"] > Config["ScreenX"] - Config["ScreenX"] / Variables["camera_z"] / 2:
-            Variables["camera_x"] = Config["ScreenX"] - Config["ScreenX"] / Variables["camera_z"] / 2
-        Variables["camera_y"] = Variables["player_posy"]
-        if Variables["camera_y"] < Config["ScreenY"] / Variables["camera_z"] / 2:
-            Variables["camera_y"] = Config["ScreenY"] / Variables["camera_z"] / 2
-        if Variables["camera_y"] > Config["ScreenY"] - Config["ScreenY"] / Variables["camera_z"] / 2:
-            Variables["camera_y"] = Config["ScreenY"] - Config["ScreenY"] / Variables["camera_z"] / 2
-        #Update sprites
-        sprites_group_entity.update()
-        sprites_group_tile.update()
+                        if "ground-dark_grass" in Grid[tile - Settings["GridW"]][4] + Grid[tile - 1][4] + Grid[tile + 1][4] + Grid[tile + Settings["GridW"]][4]:
+                            Grid[tile][4] = "ground-dark_grass"
+            #Set camera X and Y and change them if the player is near the edge of the world
+            Variables["camera_x"] = Variables["player_posx"]
+            if Variables["camera_x"] < Config["ScreenX"] / Variables["camera_z"] / 2:
+                Variables["camera_x"] = Config["ScreenX"] / Variables["camera_z"] / 2
+            if Variables["camera_x"] > Config["ScreenX"] - Config["ScreenX"] / Variables["camera_z"] / 2:
+                Variables["camera_x"] = Config["ScreenX"] - Config["ScreenX"] / Variables["camera_z"] / 2
+            Variables["camera_y"] = Variables["player_posy"]
+            if Variables["camera_y"] < Config["ScreenY"] / Variables["camera_z"] / 2:
+                Variables["camera_y"] = Config["ScreenY"] / Variables["camera_z"] / 2
+            if Variables["camera_y"] > Config["ScreenY"] - Config["ScreenY"] / Variables["camera_z"] / 2:
+                Variables["camera_y"] = Config["ScreenY"] - Config["ScreenY"] / Variables["camera_z"] / 2
+            #Update sprites
+            sprites_group_entity.update()
+            sprites_group_tile.update()
+            #Set time and change time lighting
+            Variables["time_frames"] += 1
+            Variables["time_seconds"] = Variables["time_frames"] / Config["Framerate"]
+            Variables["time_day_percentage"] = (100 / Variables["time_day_length"]) * (Variables["time_seconds"] % Variables["time_day_length"])
+            if Variables["time_day_percentage"] <= 12.5:
+                screen_effect_time.set_alpha(Variables["time_day_percentage"] * (-128 / 25) + 64)
+                screen_effect_time.fill((255, 128,   0))
+            elif Variables["time_day_percentage"] >= 12.5 and Variables["time_day_percentage"] <= 37.5:
+                screen_effect_time.set_alpha(0)
+                screen_effect_time.fill((255, 128,   0))
+            elif Variables["time_day_percentage"] >= 37.5 and Variables["time_day_percentage"] <= 50:
+                screen_effect_time.set_alpha(Variables["time_day_percentage"] * (128 / 25) - 192)
+                screen_effect_time.fill((255, 128,   0))
+            elif Variables["time_day_percentage"] >= 50 and Variables["time_day_percentage"] <= 62.5:
+                screen_effect_time.set_alpha(Variables["time_day_percentage"] * (128 / 25) - 192)
+                screen_effect_time.fill((Variables["time_day_percentage"] * (-512 / 25) + 1280, Variables["time_day_percentage"] * (-256 / 25) + 640, Variables["time_day_percentage"] * (256 / 25) - 512))
+            elif Variables["time_day_percentage"] >= 62.5 and Variables["time_day_percentage"] <= 87.5:
+                screen_effect_time.set_alpha(128)
+                screen_effect_time.fill((  0,   0, 128))
+            elif Variables["time_day_percentage"] >= 87.5:
+                screen_effect_time.set_alpha(Variables["time_day_percentage"] * (-128 / 25) + 576)
+                screen_effect_time.fill((Variables["time_day_percentage"] * (512 / 25) - 1792, Variables["time_day_percentage"] * (256 / 25) - 896, Variables["time_day_percentage"] * (-256 / 25) + 1024))
         sprites_group_ui.update()
-        #Set time and change time lighting
-        Variables["time_frames"] += 1
-        Variables["time_seconds"] = Variables["time_frames"] / Config["Framerate"]
-        Variables["time_day_percentage"] = (100 / Variables["time_day_length"]) * (Variables["time_seconds"] % Variables["time_day_length"])
-        if Variables["time_day_percentage"] <= 12.5:
-            screen_effect_time.set_alpha(Variables["time_day_percentage"] * (-128 / 25) + 64)
-            screen_effect_time.fill((255, 128,   0))
-        elif Variables["time_day_percentage"] >= 12.5 and Variables["time_day_percentage"] <= 37.5:
-            screen_effect_time.set_alpha(0)
-            screen_effect_time.fill((255, 128,   0))
-        elif Variables["time_day_percentage"] >= 37.5 and Variables["time_day_percentage"] <= 50:
-            screen_effect_time.set_alpha(Variables["time_day_percentage"] * (128 / 25) - 192)
-            screen_effect_time.fill((255, 128,   0))
-        elif Variables["time_day_percentage"] >= 50 and Variables["time_day_percentage"] <= 62.5:
-            screen_effect_time.set_alpha(Variables["time_day_percentage"] * (128 / 25) - 192)
-            screen_effect_time.fill((Variables["time_day_percentage"] * (-512 / 25) + 1280, Variables["time_day_percentage"] * (-256 / 25) + 640, Variables["time_day_percentage"] * (256 / 25) - 512))
-        elif Variables["time_day_percentage"] >= 62.5 and Variables["time_day_percentage"] <= 87.5:
-            screen_effect_time.set_alpha(128)
-            screen_effect_time.fill((  0,   0, 128))
-        elif Variables["time_day_percentage"] >= 87.5:
-            screen_effect_time.set_alpha(Variables["time_day_percentage"] * (-128 / 25) + 576)
-            screen_effect_time.fill((Variables["time_day_percentage"] * (512 / 25) - 1792, Variables["time_day_percentage"] * (256 / 25) - 896, Variables["time_day_percentage"] * (-256 / 25) + 1024))
         draw()
         clock.tick(Config["Framerate"])
 if __name__ == "__main__":
