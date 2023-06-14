@@ -27,9 +27,7 @@ Open Debug Screen - Q
 Click Button - Left Click
 
 ## Things I want to fix
--Going to the bottom edge of the world crashes the game
-
--The game crashes when you try to move an item in the inventory
+-Going near the bottom edge of the world crashes the game
 
 -The game is laggier when there are more items in the inventory
 
