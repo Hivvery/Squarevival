@@ -14,11 +14,13 @@ Destroy Tile - Left Click
 
 Place Item - Right Click
 
+Pause Game - Escape
+
 Open/Close Inventory - E
 
 Select Item - 1-8
 
-Move Inventory Item - Left Click
+Pick Up Inventory Item - Left Click
 
 Open Debug Screen - Q
 
@@ -32,7 +34,5 @@ Click Button - Left Click
 -The game is laggier when there are more items in the inventory
 
 -The tiles don't show near the world's edges
-
--Tiles can be destroyed in the main menu
 
 -Walking diagonally into objects lets you walk through them
