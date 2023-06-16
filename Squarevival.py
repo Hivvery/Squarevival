@@ -88,6 +88,8 @@ Images = {
     "object-sand_bricks"            : pygame.image.load("Images/squarevival-object-sand_bricks.png"            ),
     "object-stone"                  : pygame.image.load("Images/squarevival-object-stone.png"                  ),
     "object-stone_bricks"           : pygame.image.load("Images/squarevival-object-stone_bricks.png"           ),
+    #User interface images
+    "ui-menu"                       : pygame.image.load("Images/squarevival-ui-menu.png"                       ),
 }
 #Cooldown time lengths
 Cooldowns_Length = {
@@ -323,6 +325,22 @@ ObjectsSolid = [
 ]
 #World terrain points
 Points = [[a, 1, random.randrange(0, Config["ScreenX"]), random.randrange(0, Config["ScreenY"])] for a in range(3) for b in range(int(Settings["Points"] / 2))] + [[a, -1, random.randrange(0, Config["ScreenX"]), random.randrange(0, Config["ScreenY"])] for a in range(3) for b in range(int(Settings["Points"] / 2))]
+#Colors for lighting
+Time_Colors = [[0, 0, 0, 0] for i in range(200)]
+for i in range(len(Time_Colors)):
+    percentage = i / (len(Time_Colors) / 100)
+    if percentage <= 12.5:
+        Time_Colors[i] = [255, 128, 0, percentage * (-128 / 25) + 64]
+    elif percentage <= 37.5:
+        Time_Colors[i] = [255, 128, 0, 0]
+    elif percentage <= 50:
+        Time_Colors[i] = [255, 128, 0, percentage * (128 / 25) - 192]
+    elif percentage <= 62.5:
+        Time_Colors[i] = [percentage * (-512 / 25) + 1280, percentage * (-256 / 25) + 640, percentage * (256 / 25) - 512, percentage * (128 / 25) - 192]
+    elif percentage <= 87.5:
+        Time_Colors[i] = [0, 0, 128, 128]
+    else:
+        Time_Colors[i] = [percentage * (512 / 25) - 1792, percentage * (256 / 25) - 896, percentage * (-256 / 25) + 1024, percentage * (-128 / 25) + 576]
 
 #VARIABLES
 structure_depth, sprites_group_entity, sprites_group_tile, sprites_group_ui = 0, pygame.sprite.Group(), pygame.sprite.Group(), pygame.sprite.Group()
@@ -449,7 +467,7 @@ class Tile(pygame.sprite.Sprite):
                             itementity("entity-item-iron_bar", self.posx, self.posy)
                     Grid[self.id][5] = ""
             #Placing items
-            if pygame.mouse.get_pressed()[2] == 1 and Grid[self.id][5] == "" and not Variables["menu_inventory"]:
+            if pygame.mouse.get_pressed()[2] == 1 and Grid[self.id][5] == "" or Grid[self.id][5] == "object-cave" and not Variables["menu_inventory"]:
                 if Inventory[Variables["hotbar"]][0] == "item-bright_wood":
                     Grid[self.id][5] = "object-bright_wood"
                     itemremove(Variables["hotbar"])
@@ -477,6 +495,7 @@ class Tile(pygame.sprite.Sprite):
         if not Grid[self.id][4] == "":
             self.image = Images[Grid[self.id][4]]
         self.rect.center = ((self.posx - Variables["camera_x"]) * Variables["camera_z"] + Config["ScreenX"] / 2, (self.posy - Variables["camera_y"]) * Variables["camera_z"] + Config["ScreenY"] / 2)
+#User interface buttons
 class UI_Button(pygame.sprite.Sprite):
     def __init__(self, identity, pos_x, pos_y, size_x, size_y, color, text_color, text_font, text_size, text):
         pygame.sprite.Sprite.__init__(self)
@@ -619,6 +638,7 @@ def draw():
         screen.blit(text, text_rect)
     elif Variables["page"] == 0:
         screen.fill((  0, 255, 102))
+        screen.blit(Images["ui-menu"], [0, 0])
         sprites_group_ui.draw(screen)
         font = pygame.font.SysFont("bahnschrift", 100)
         text = font.render("Squarevival", True, (  0,   0,   0))
@@ -735,7 +755,9 @@ def main():
     pygame.display.set_icon(Images["entity-u"])
     #Resize images
     for i in range(len(Images)):
-        if "entity-item" in ImagesList[i]:
+        if ImagesList[i] == "ui-menu":
+            scale = 720
+        elif "entity-item" in ImagesList[i]:
             scale = Settings["TileSize"] * Variables["camera_z"] * 0.75
         elif "item" in ImagesList[i]:
             scale = 81
@@ -1045,24 +1067,8 @@ def main():
             Variables["time_frames"] += 1
             Variables["time_seconds"] = Variables["time_frames"] / Config["Framerate"]
             Variables["time_day_percentage"] = (100 / Variables["time_day_length"]) * (Variables["time_seconds"] % Variables["time_day_length"])
-            if Variables["time_day_percentage"] <= 12.5:
-                screen_effect_time.set_alpha(Variables["time_day_percentage"] * (-128 / 25) + 64)
-                screen_effect_time.fill((255, 128,   0))
-            elif Variables["time_day_percentage"] >= 12.5 and Variables["time_day_percentage"] <= 37.5:
-                screen_effect_time.set_alpha(0)
-                screen_effect_time.fill((255, 128,   0))
-            elif Variables["time_day_percentage"] >= 37.5 and Variables["time_day_percentage"] <= 50:
-                screen_effect_time.set_alpha(Variables["time_day_percentage"] * (128 / 25) - 192)
-                screen_effect_time.fill((255, 128,   0))
-            elif Variables["time_day_percentage"] >= 50 and Variables["time_day_percentage"] <= 62.5:
-                screen_effect_time.set_alpha(Variables["time_day_percentage"] * (128 / 25) - 192)
-                screen_effect_time.fill((Variables["time_day_percentage"] * (-512 / 25) + 1280, Variables["time_day_percentage"] * (-256 / 25) + 640, Variables["time_day_percentage"] * (256 / 25) - 512))
-            elif Variables["time_day_percentage"] >= 62.5 and Variables["time_day_percentage"] <= 87.5:
-                screen_effect_time.set_alpha(128)
-                screen_effect_time.fill((  0,   0, 128))
-            elif Variables["time_day_percentage"] >= 87.5:
-                screen_effect_time.set_alpha(Variables["time_day_percentage"] * (-128 / 25) + 576)
-                screen_effect_time.fill((Variables["time_day_percentage"] * (512 / 25) - 1792, Variables["time_day_percentage"] * (256 / 25) - 896, Variables["time_day_percentage"] * (-256 / 25) + 1024))
+            screen_effect_time.set_alpha(Time_Colors[int(Variables["time_day_percentage"] // 1)][3])
+            screen_effect_time.fill((Time_Colors[int(Variables["time_day_percentage"] // 1)][0], Time_Colors[int(Variables["time_day_percentage"] // 1)][1], Time_Colors[int(Variables["time_day_percentage"] // 1)][2]))
         sprites_group_ui.update()
         draw()
         clock.tick(Config["Framerate"])
