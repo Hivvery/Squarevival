@@ -1,5 +1,5 @@
 # Squarevival
-Squarevival is a game heavily inspired by Minecraft by Mojang Studios I've been working on.
+Squarevival is a game heavily inspired by Minecraft by Mojang Studios.
 
 ## Keybinds
 Move Up - W
@@ -24,13 +24,21 @@ Pick Up Inventory Item - Left Click
 
 Open Debug Screen - Q
 
-Click Button - Left Click
+Use Button - Left Click
 
-## Things I want to fix
+Exit Menu - Escape
+
+## Bugs
+-Exiting the settings menu doesn't take you to the pause menu when it's supposed to
+
 -Going near the bottom edge of the world crashes the game
 
 -The game is laggier when there are more items in the inventory
 
--The tiles don't show near the world's edges
+-Tiles are destroyed when you click on the "Play" and "Save World" buttons
 
--Walking diagonally into objects lets you walk through them
+-Tiles at the edges of the screen don't show if you stand on specific parts of tiles
+
+-Tiles don't show near the world's edges
+
+-Walking diagonally into corners of objects lets you walk through them
