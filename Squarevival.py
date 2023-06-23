@@ -343,7 +343,7 @@ for i in range(len(Time_Colors)):
         Time_Colors[i] = [percentage * (512 / 25) - 1792, percentage * (256 / 25) - 896, percentage * (-256 / 25) + 1024, percentage * (-128 / 25) + 576]
 
 #VARIABLES
-structure_depth, sprites_group_entity, sprites_group_tile, sprites_group_ui = 0, pygame.sprite.Group(), pygame.sprite.Group(), pygame.sprite.Group()
+structure_depth, sprites_group_entity, sprites_group_tile, sprites_group_ui_main, sprites_group_ui_pause = 0, pygame.sprite.Group(), pygame.sprite.Group(), pygame.sprite.Group(), pygame.sprite.Group()
 
 #CLASSES
 #Entities (The player, items etc.)
@@ -518,10 +518,19 @@ class UI_Button(pygame.sprite.Sprite):
                     Variables["page"] = 4
                     Variables["game"] = True
                     Variables["game_running"] = True
-                elif self.identity == 1 and Variables["page"] == 0:
+                elif self.identity == 1:
                     Variables["menu_settings"] = True
-                elif self.identity == 2 and Variables["page"] == 0:
+                elif self.identity == 2:
                     Variables["page"] = 3
+                elif self.identity == 3:
+                    Variables["menu_settings"] = True
+                elif self.identity == 4:
+                    Variables["game_running"] = True
+                    Variables["menu_pause"] = False
+                elif self.identity == 6:
+                    Variables["page"] = 0
+                    Variables["game"] = False
+                    Variables["menu_pause"] = False
         self.rect.center = (self.pos_x, self.pos_y)
 
 #FUNCTIONS
@@ -639,15 +648,23 @@ def draw():
     elif Variables["page"] == 0:
         screen.fill((  0, 255, 102))
         screen.blit(Images["ui-menu"], [0, 0])
-        sprites_group_ui.draw(screen)
+        sprites_group_ui_main.draw(screen)
         font = pygame.font.SysFont("bahnschrift", 100)
         text = font.render("Squarevival", True, (  0,   0,   0))
         text_rect = text.get_rect(center=(Config["ScreenX"] / 2, 75))
         screen.blit(text, text_rect)
     elif Variables["page"] == 1:
         screen.fill((  0, 255, 102))
+        font = pygame.font.SysFont("bahnschrift", 75)
+        text = font.render("Worlds", True, (  0,   0,   0))
+        text_rect = text.get_rect(center=(Config["ScreenX"] / 2, 50))
+        screen.blit(text, text_rect)
     elif Variables["page"] == 2:
         screen.fill((  0, 255, 102))
+        font = pygame.font.SysFont("bahnschrift", 75)
+        text = font.render("Create World", True, (  0,   0,   0))
+        text_rect = text.get_rect(center=(Config["ScreenX"] / 2, 50))
+        screen.blit(text, text_rect)
     elif Variables["page"] == 3:
         screen.fill((  0,   0,   0))
     elif Variables["page"] == 4:
@@ -673,9 +690,11 @@ def draw():
         #Draw the debug screen
         if Variables["menu_pause"]:
             screen_effect_pause.fill((  0,   0,   0, 128))
+            sprites_group_ui_pause.draw(screen_effect_pause)
+            pygame.draw.rect(screen_effect_pause, (  0,   0,   0), [Config["ScreenX"] / 2 - 160, Config["ScreenY"] / 2 - 166, 320, 60])
             font = pygame.font.SysFont("bahnschrift", 50)
             text = font.render("Game Paused", True, (255, 255, 255))
-            text_rect = text.get_rect(center=(Config["ScreenX"] / 2, Config["ScreenY"] / 2))
+            text_rect = text.get_rect(center=(Config["ScreenX"] / 2, Config["ScreenY"] / 2 - 136))
             screen_effect_pause.blit(text, text_rect)
             screen.blit(screen_effect_pause, (0, 0))
         elif Variables["menu_debug"] and not Variables["menu_inventory"]:
@@ -696,7 +715,7 @@ def draw():
             screen.blit(text, [10, 130])
             text = font.render("Biome Info (Water, Temperature, Humidity): " + str(round(Grid[Variables["player_tile"]][0], 3)) + ", " + str(round(Grid[Variables["player_tile"]][1], 3)) + ", " + str(round(Grid[Variables["player_tile"]][2], 3)), True, (255, 255, 255))
             screen.blit(text, [10, 160])
-            text = font.render("Time (%, #): " + str(round(Variables["time_day_percentage"], 1)) + ", " + str(Variables["time_seconds"] // Variables["time_day_length"]), True, (255, 255, 255))
+            text = font.render("Time (%, #): " + str(round(Variables["time_day_percentage"], 1)) + ", " + str(int(Variables["time_seconds"] // Variables["time_day_length"])), True, (255, 255, 255))
             screen.blit(text, [10, 190])
         #Draw the hotbar/inventory
         if Variables["game_running"]:
@@ -766,11 +785,19 @@ def main():
         Images[ImagesList[i]] = pygame.transform.scale(Images[ImagesList[i]], (scale, scale))
     #Make user interface
     sprite = UI_Button(0, Config["ScreenX"] / 2 - 200, 200, 160, 80, (255, 255, 255), (  0,   0,   0), "bahnschrift", 40, "Play")
-    sprites_group_ui.add(sprite)
+    sprites_group_ui_main.add(sprite)
     sprite = UI_Button(1, Config["ScreenX"] / 2, 200, 160, 80, (255, 255, 255), (  0,   0,   0), "bahnschrift", 40, "Settings")
-    sprites_group_ui.add(sprite)
+    sprites_group_ui_main.add(sprite)
     sprite = UI_Button(2, Config["ScreenX"] / 2 + 200, 200, 160, 80, (255, 255, 255), (  0,   0,   0), "bahnschrift", 40, "Credits")
-    sprites_group_ui.add(sprite)
+    sprites_group_ui_main.add(sprite)
+    sprite = UI_Button(3, Config["ScreenX"] / 2, Config["ScreenY"] / 2 - 68, 320, 60, (  0, 255, 102), (  0,   0,   0), "bahnschrift", 40, "Settings")
+    sprites_group_ui_pause.add(sprite)
+    sprite = UI_Button(4, Config["ScreenX"] / 2, Config["ScreenY"] / 2, 320, 60, (  0, 255, 102), (  0,   0,   0), "bahnschrift", 40, "Save World")
+    sprites_group_ui_pause.add(sprite)
+    sprite = UI_Button(5, Config["ScreenX"] / 2, Config["ScreenY"] / 2 + 68, 320, 60, (  0, 255, 102), (  0,   0,   0), "bahnschrift", 40, "Save World As")
+    sprites_group_ui_pause.add(sprite)
+    sprite = UI_Button(6, Config["ScreenX"] / 2, Config["ScreenY"] / 2 + 136, 320, 60, (  0, 255, 102), (  0,   0,   0), "bahnschrift", 40, "Save and Quit")
+    sprites_group_ui_pause.add(sprite)
     #Generate world
     for a in range(len(Grid)):
         tile_posx = (a + 0.5) % Settings["GridW"] * Settings["TileSize"]
@@ -980,13 +1007,20 @@ def main():
                         Keys["S"] = True
                     if event.key == pygame.K_w:
                         Keys["W"] = True
-                if event.key == pygame.K_ESCAPE and Variables["page"] == 4 and not Variables["menu_inventory"]:
-                    if Variables["game_running"]:
-                        Variables["game_running"] = False
-                        Variables["menu_pause"] = True
-                    else:
-                        Variables["game_running"] = True
-                        Variables["menu_pause"] = False
+                if event.key == pygame.K_ESCAPE:
+                    if Variables["page"] == 1 or Variables["page"] == 3:
+                        Variables["page"] = 0
+                    if Variables["page"] == 2:
+                        Variables["page"] = 1
+                    if Variables["page"] == 4 and not Variables["menu_inventory"]:
+                        if Variables["game_running"]:
+                            Variables["game_running"] = False
+                            Variables["menu_pause"] = True
+                        else:
+                            Variables["game_running"] = True
+                            Variables["menu_pause"] = False
+                    if Variables["menu_settings"]:
+                        Variables["menu_settings"] = False
             if event.type == pygame.KEYUP and Variables["game_running"]:
                 if event.key == pygame.K_a:
                     Keys["A"] = False
@@ -1067,9 +1101,12 @@ def main():
             Variables["time_frames"] += 1
             Variables["time_seconds"] = Variables["time_frames"] / Config["Framerate"]
             Variables["time_day_percentage"] = (100 / Variables["time_day_length"]) * (Variables["time_seconds"] % Variables["time_day_length"])
-            screen_effect_time.set_alpha(Time_Colors[int(Variables["time_day_percentage"] // 1)][3])
-            screen_effect_time.fill((Time_Colors[int(Variables["time_day_percentage"] // 1)][0], Time_Colors[int(Variables["time_day_percentage"] // 1)][1], Time_Colors[int(Variables["time_day_percentage"] // 1)][2]))
-        sprites_group_ui.update()
+            screen_effect_time.set_alpha(Time_Colors[int(Variables["time_day_percentage"] // (100 / len(Time_Colors)))][3])
+            screen_effect_time.fill((Time_Colors[int(Variables["time_day_percentage"] // (100 / len(Time_Colors)))][0], Time_Colors[int(Variables["time_day_percentage"] // (100 / len(Time_Colors)))][1], Time_Colors[int(Variables["time_day_percentage"] // (100 / len(Time_Colors)))][2]))
+        if Variables["page"] == 0:
+            sprites_group_ui_main.update()
+        if Variables["menu_pause"]:
+            sprites_group_ui_pause.update()
         draw()
         clock.tick(Config["Framerate"])
 if __name__ == "__main__":
