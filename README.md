@@ -1,34 +1,34 @@
 # Squarevival
 Squarevival is a game heavily inspired by Minecraft by Mojang Studios.
 
+
+
 ## Keybinds
-Move Up - W
+W: Move up
 
-Move Down - S
+S: Move down
 
-Move Left - A
+A: Move left
 
-Move Right - D
+D: Move right
 
-Destroy Tile - Left Click
+Left Click: Destroy tile, Use button, Pick up item
 
-Place Item - Right Click
+Right Click: Place item
 
-Pause Game - Escape
+E: Open/Close inventory
 
-Open/Close Inventory - E
+1-8: Select item
 
-Select Item - 1-8
+Q: Open/Close debug screen
 
-Pick Up Inventory Item - Left Click
+Escape: Pause game, Exit menu
 
-Open Debug Screen - Q
+![Python Progress - Squarevival 5-I1](https://github.com/Hivvery/Squarevival/assets/130877981/02af3c47-1949-49de-8bf6-5bb594f794eb)
 
-Use Button - Left Click
+https://github.com/Hivvery/Squarevival/assets/130877981/51fbd1da-fe88-414a-8ac3-96a618cfe7e0
 
-Exit Menu - Escape
-
-## Bugs
+## Known Bugs
 -Exiting the settings menu doesn't take you to the pause menu when it's supposed to
 
 -Going near the bottom edge of the world crashes the game
